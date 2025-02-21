@@ -15,11 +15,11 @@ use rex_yform_manager_dataset;
 if (rex_addon::get('yform')->isAvailable() && !rex::isSafeMode()) {
     rex_yform_manager_dataset::setModelClass(
         rex::getTable('jira_knowledgebase_sync_entry'),
-        Entry::class
+        Entry::class,
     );
     rex_yform_manager_dataset::setModelClass(
         rex::getTable('jira_knowledgebase_sync_category'),
-        Category::class
+        Category::class,
     );
 }
 
@@ -28,10 +28,8 @@ if (rex_addon::get('cronjob')->isAvailable() && !rex::isSafeMode()) {
     rex_cronjob_manager::registerType(Cronjob\Sync::class);
 }
 
-
 // Listendarstellung verändern
 if (rex::isBackend()) {
     rex_extension::register('YFORM_DATA_LIST', Entry::epYformDataList(...));
     rex_extension::register('YFORM_DATA_LIST', Category::epYformDataList(...));
 }
-
