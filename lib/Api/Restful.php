@@ -4,9 +4,9 @@
 
 namespace Ropaweb\JiraKnowledgebaseSync\Api;
 
-use Ropaweb\JiraKnowledgebaseSync\JiraKnowledgebaseSync;
 use rex_yform_rest;
 use rex_yform_rest_route;
+use Ropaweb\JiraKnowledgebaseSync\JiraKnowledgebaseSync;
 
 class Restful
 {
