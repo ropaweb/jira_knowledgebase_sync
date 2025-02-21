@@ -1,10 +1,10 @@
 {
     "wildcards": {
-        "blaupause.beispiel.string": {
+        "jira_knowledgebase_sync.beispiel.string": {
             "timestamp": "2024-05-20 12:00:00",
             "translations": {
                 "da_DK": "Blåprint",
-                "de_DE": "Blaupause",
+                "de_DE": "JiraKnowledgebaseSync",
                 "el_GR": "Πρότυπο",
                 "en_GB": "Blueprint",
                 "es_ES": "Plantilla",

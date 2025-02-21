@@ -2,9 +2,9 @@
 
 /* Nutze das Addon YMCA, um die Model-Klasse zu generieren */
 
-namespace Alexplusde\Blaupause\Api;
+namespace Ropaweb\JiraKnowledgebaseSync\Api;
 
-use Alexplusde\Blaupause\Blaupause;
+use Ropaweb\JiraKnowledgebaseSync\JiraKnowledgebaseSync;
 use rex_yform_rest;
 use rex_yform_rest_route;
 
@@ -12,15 +12,15 @@ class Restful
 {
     public static function init(): void
     {
-        $rex_blaupause_route = new rex_yform_rest_route(
+        $rex_jira_knowledgebase_sync_route = new rex_yform_rest_route(
             [
-                'path' => '/blaupause/thing/1.0.0/',
+                'path' => '/jira_knowledgebase_sync/thing/1.0.0/',
                 'auth' => '\rex_yform_rest_auth_token::checkToken',
-                'type' => Blaupause::class,
-                'query' => Blaupause::query(),
+                'type' => JiraKnowledgebaseSync::class,
+                'query' => JiraKnowledgebaseSync::query(),
                 'get' => [
                     'fields' => [
-                        'rex_blaupause' => [
+                        'rex_jira_knowledgebase_sync' => [
                             'id',
                             'status',
                             'name',
@@ -34,7 +34,7 @@ class Restful
                 ],
                 'post' => [
                     'fields' => [
-                        'rex_blaupause' => [
+                        'rex_jira_knowledgebase_sync' => [
                             'status',
                             'name',
                             'createdate',
@@ -47,7 +47,7 @@ class Restful
                 ],
                 'delete' => [
                     'fields' => [
-                        'rex_blaupause' => [
+                        'rex_jira_knowledgebase_sync' => [
                             'id',
                         ],
                     ],
@@ -55,6 +55,6 @@ class Restful
             ],
         );
 
-        rex_yform_rest::addRoute($rex_blaupause_route);
+        rex_yform_rest::addRoute($rex_jira_knowledgebase_sync_route);
     }
 }

@@ -1,6 +1,6 @@
 <?php
 
-rex_sql_table::get(rex::getTable('blaupause_category'))
+rex_sql_table::get(rex::getTable('jira_knowledgebase_sync_category'))
     ->ensurePrimaryIdColumn()
     ->ensureColumn(new rex_sql_column('name', 'varchar(191)', false, ''))
     ->ensureColumn(new rex_sql_column('status', 'int(11)'))
@@ -9,11 +9,11 @@ rex_sql_table::get(rex::getTable('blaupause_category'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updateuser', 'varchar(191)'))
     ->ensureColumn(new rex_sql_column('uuid', 'varchar(36)'))
-    ->ensureColumn(new rex_sql_column('blaupause_entry_ids', 'int(10) unsigned'))
+    ->ensureColumn(new rex_sql_column('jira_knowledgebase_sync_entry_ids', 'int(10) unsigned'))
     ->ensureIndex(new rex_sql_index('uuid', ['uuid'], rex_sql_index::UNIQUE))
     ->ensure();
 
-rex_sql_table::get(rex::getTable('blaupause_entry'))
+rex_sql_table::get(rex::getTable('jira_knowledgebase_sync_entry'))
     ->ensurePrimaryIdColumn()
     ->ensureColumn(new rex_sql_column('name', 'varchar(191)', false, ''))
     ->ensureColumn(new rex_sql_column('status', 'int(11)'))
@@ -22,6 +22,6 @@ rex_sql_table::get(rex::getTable('blaupause_entry'))
     ->ensureColumn(new rex_sql_column('updatedate', 'datetime'))
     ->ensureColumn(new rex_sql_column('updateuser', 'varchar(191)'))
     ->ensureColumn(new rex_sql_column('uuid', 'varchar(36)'))
-    ->ensureColumn(new rex_sql_column('blaupause_category_id', 'int(10) unsigned'))
+    ->ensureColumn(new rex_sql_column('jira_knowledgebase_sync_category_id', 'int(10) unsigned'))
     ->ensureIndex(new rex_sql_index('uuid', ['uuid'], rex_sql_index::UNIQUE))
     ->ensure();

@@ -1,9 +1,9 @@
 # Suche mit regex nach ` *#.*$` und ersetze durch ``, um Kommentare zu entfernen
 
-package: blaupause # Addon-Key, ggf. wie er bei MyREDAXO hinterlegt ist.
+package: jira_knowledgebase_sync # Addon-Key, ggf. wie er bei MyREDAXO hinterlegt ist.
 version: '2.1.0-dev-2025-02-15' # Aktuelle Version. 
 author: 'Alexander Walther' # Name(n) der Autoren, wird im Installer gezeigt
-supportpage: https://github.com/alexplusde/blaupause # Support-Seite, wird im Installer gezeigt
+supportpage: https://github.com/alexplusde/jira_knowledgebase_sync # Support-Seite, wird im Installer gezeigt
 # load: late 
 
 requires:                       # Abhängigkeiten definieren, z.B.
@@ -21,41 +21,41 @@ requires:                       # Abhängigkeiten definieren, z.B.
 #        - package: "<4" # Konflikte mit Versionen von anderen Addons
 
 page:
-    title: translate:blaupause.title    # Übersetzung definieren in lang/de_de.lang
+    title: translate:jira_knowledgebase_sync.title    # Übersetzung definieren in lang/de_de.lang
     prio: 100                       # Reihenfolge in Relation zur Prio anderer Menüeinträge 
     icon: rex-icon fa-gear
 
 pages:
-    blaupause: # key, unter dem die Seite zu finden sein wird. Passende Datei im Addon-Verzeichnis `pages/blaupause.blaupausepage.php` muss vorhanden sein.
-        title: translate:blaupause.title
+    jira_knowledgebase_sync: # key, unter dem die Seite zu finden sein wird. Passende Datei im Addon-Verzeichnis `pages/jira_knowledgebase_sync.jira_knowledgebase_syncpage.php` muss vorhanden sein.
+        title: translate:jira_knowledgebase_sync.title
 #        main: true                 
-        block: system               # 'system', um ins Hauptmenü zu verschieben, oder 'blaupause', um eigenen blaupause-Abschnitt zu erstellen. Weglassen, um bei den Addons gelistet zu werden 
+        block: system               # 'system', um ins Hauptmenü zu verschieben, oder 'jira_knowledgebase_sync', um eigenen jira_knowledgebase_sync-Abschnitt zu erstellen. Weglassen, um bei den Addons gelistet zu werden 
         prio: 15                    # Reihenfolge in Abhängigkeit anderer Addons
         icon: rex-icon fa-document  # Icon neben dem Menüpunkt
-        perm: blaupause[]               # Berechtigung, die einer Rolle zugewiesen werden kann. z.B. `admin` für Admin, oder `blaupause['xyz']` für dein eigenes Addon
-        subpages:                   # Automatisches Untermenü unterhalb des Reisters von `blaupausepage` erzeugen
+        perm: jira_knowledgebase_sync[]               # Berechtigung, die einer Rolle zugewiesen werden kann. z.B. `admin` für Admin, oder `jira_knowledgebase_sync['xyz']` für dein eigenes Addon
+        subpages:                   # Automatisches Untermenü unterhalb des Reisters von `jira_knowledgebase_syncpage` erzeugen
             entry:
-                title: translate:blaupause_table
+                title: translate:jira_knowledgebase_sync_table
                 icon: rex-icon fa-document
-                perm: blaupause[entry]
+                perm: jira_knowledgebase_sync[entry]
             category:
-                title: translate:blaupause_table
+                title: translate:jira_knowledgebase_sync_table
                 icon: rex-icon fa-folder
-                perm: blaupause[category]
+                perm: jira_knowledgebase_sync[category]
             settings:
-                title: translate:blaupause_settings
+                title: translate:jira_knowledgebase_sync_settings
                 icon: rex-icon fa-gear
                 itemClass: pull-right
                 perm: admin
             docs:
-                title: translate:blaupause_docs
+                title: translate:jira_knowledgebase_sync_docs
                 subPath: README.md  # Gibt anstelle einer Seite unter `pages` die README.md des Addons aus
                 icon: rex-icon fa-info-circle
                 itemClass: pull-right
-                perm: blaupause[docs]
+                perm: jira_knowledgebase_sync[docs]
 
 default_config:
-    field: 'Test' # Bei der Installation belegt REDAXO automatisch in der rex_config-Tabelle im Namespace `blaupause` im Feld `field` den Wert `Test` 
+    field: 'Test' # Bei der Installation belegt REDAXO automatisch in der rex_config-Tabelle im Namespace `jira_knowledgebase_sync` im Feld `field` den Wert `Test` 
 
 installer_ignore:
 - .git

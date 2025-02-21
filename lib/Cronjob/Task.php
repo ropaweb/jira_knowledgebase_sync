@@ -1,6 +1,6 @@
 <?php
 
-namespace Alexplusde\Blaupause\Cronjob;
+namespace Ropaweb\JiraKnowledgebaseSync\Cronjob;
 
 use rex_cronjob;
 use rex_i18n;
@@ -13,27 +13,27 @@ class Task extends rex_cronjob
     {
         /* Tu was */
         if (false) {
-            $this->setMessage(rex_i18n::msg('blaupause_cronjob_task_error'));
+            $this->setMessage(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_error'));
             return false;
         }
 
-        $this->setMessage(rex_i18n::msg('blaupause_cronjob_task_success'));
+        $this->setMessage(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_success'));
         return true;
     }
 
     public function getTypeName()
     {
-        return rex_i18n::msg('blaupause_cronjob_task_name');
+        return rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_name');
     }
 
     public function getParamFields()
     {
         $fields = [
             [
-                'label' => rex_i18n::msg('blaupause_cronjob_task_field_label'),
-                'name' => 'blaupause_field',
+                'label' => rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_field_label'),
+                'name' => 'jira_knowledgebase_sync_field',
                 'type' => 'link', // text, textarea, link, media, select, checkbox
-                'notice' => rex_i18n::msg('blaupause_cronjob_task_field_notice'),
+                'notice' => rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_field_notice'),
             ],
         ];
 

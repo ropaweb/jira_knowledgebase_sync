@@ -6,7 +6,7 @@
  */
 
 $mdFiles = [];
-foreach (glob(rex_addon::get('blaupause')->getPath('docs') . '/*.md') ?: [] as $file) {
+foreach (glob(rex_addon::get('jira_knowledgebase_sync')->getPath('docs') . '/*.md') ?: [] as $file) {
     $mdFiles[mb_substr(basename($file), 0, -3)] = $file;
 }
 
@@ -15,22 +15,22 @@ if (!array_key_exists($currenMDFile, $mdFiles)) {
     $currenMDFile = '01_intro';
 }
 
-$page = rex_be_controller::getPageObject('blaupause/docs');
+$page = rex_be_controller::getPageObject('jira_knowledgebase_sync/docs');
 
 if (null !== $page) {
     foreach ($mdFiles as $key => $mdFile) {
         $keyWithoudPrio = mb_substr($key, 3);
         $currenMDFileWithoudPrio = mb_substr($currenMDFile, 3);
         $page->addSubpage(
-            (new rex_be_page($key, rex_i18n::msg('blaupause.docs.' . $keyWithoudPrio)))
+            (new rex_be_page($key, rex_i18n::msg('jira_knowledgebase_sync.docs.' . $keyWithoudPrio)))
             ->setSubPath($mdFile)
-            ->setHref('index.php?page=blaupause/docs&mdfile=' . $key)
+            ->setHref('index.php?page=jira_knowledgebase_sync/docs&mdfile=' . $key)
             ->setIsActive($key == $currenMDFile),
         );
     }
 }
 
-echo rex_view::title($this->i18n('blaupause.title'));
+echo rex_view::title($this->i18n('jira_knowledgebase_sync.title'));
 
 [$Toc, $Content] = rex_markdown::factory()->parseWithToc(rex_file::require($mdFiles[$currenMDFile]), 2, 3, [
     rex_markdown::SOFT_LINE_BREAKS => false,

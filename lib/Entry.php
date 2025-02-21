@@ -1,6 +1,6 @@
 <?php
 
-namespace Alexplusde\Blaupause;
+namespace Ropaweb\JiraKnowledgebaseSync;
 
 use rex_csrf_token;
 use rex_extension_point;

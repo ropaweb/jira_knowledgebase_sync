@@ -1,9 +1,9 @@
 {
-    "rex_blaupause_category": {
+    "rex_jira_knowledgebase_sync_category": {
         "table": {
             "status": 1,
-            "table_name": "rex_blaupause_category",
-            "name": "translate:blaupause.category.table",
+            "table_name": "rex_jira_knowledgebase_sync_category",
+            "name": "translate:jira_knowledgebase_sync.category.table",
             "description": "",
             "list_amount": 50,
             "list_sortfield": "createdate",
@@ -23,7 +23,7 @@
         },
         "fields": [
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 1,
                 "type_id": "value",
                 "type_name": "text",
@@ -31,7 +31,7 @@
                 "list_hidden": 0,
                 "search": 0,
                 "name": "name",
-                "label": "translate:blaupause.category.name",
+                "label": "translate:jira_knowledgebase_sync.category.name",
                 "not_required": "",
                 "attributes": "",
                 "default": "",
@@ -41,7 +41,7 @@
                 "prepend": ""
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 2,
                 "type_id": "validate",
                 "type_name": "empty",
@@ -51,29 +51,29 @@
                 "name": "name",
                 "label": "",
                 "not_required": "",
-                "message": "translate:blaupause.category.name.validate.empty"
+                "message": "translate:jira_knowledgebase_sync.category.name.validate.empty"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 3,
                 "type_id": "value",
                 "type_name": "be_manager_relation",
                 "db_type": "int(10) unsigned",
                 "list_hidden": 0,
                 "search": 0,
-                "name": "blaupause_entry_ids",
-                "label": "translate:blaupause.category.blaupause_entry_ids",
+                "name": "jira_knowledgebase_sync_entry_ids",
+                "label": "translate:jira_knowledgebase_sync.category.jira_knowledgebase_sync_entry_ids",
                 "not_required": "",
                 "attributes": "",
                 "notice": "",
                 "empty_option": "1",
-                "table": "rex_blaupause_entry",
-                "field": "blaupause_category_id",
+                "table": "rex_jira_knowledgebase_sync_entry",
+                "field": "jira_knowledgebase_sync_category_id",
                 "type": "3",
-                "relation_table": "rex_blaupause_entry"
+                "relation_table": "rex_jira_knowledgebase_sync_entry"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 4,
                 "type_id": "value",
                 "type_name": "choice_status",
@@ -81,11 +81,11 @@
                 "list_hidden": 0,
                 "search": 1,
                 "name": "status",
-                "label": "translate:blaupause.category.status",
+                "label": "translate:jira_knowledgebase_sync.category.status",
                 "not_required": "",
                 "multiple": "0",
                 "expanded": "0",
-                "choices": "\\Alexplusde\\Blaupause\\Entry::getStatusOptions",
+                "choices": "\\Ropaweb\\JiraKnowledgebaseSync\\Entry::getStatusOptions",
                 "choice_attributes": "",
                 "attributes": "",
                 "default": "",
@@ -98,7 +98,7 @@
                 "choice_label": ""
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 5,
                 "type_id": "validate",
                 "type_name": "empty",
@@ -108,10 +108,10 @@
                 "name": "status",
                 "label": "",
                 "not_required": "",
-                "message": "translate:blaupause.category.status.validate.empty"
+                "message": "translate:jira_knowledgebase_sync.category.status.validate.empty"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 6,
                 "type_id": "value",
                 "type_name": "datestamp",
@@ -119,14 +119,14 @@
                 "list_hidden": 0,
                 "search": 0,
                 "name": "createdate",
-                "label": "translate:blaupause.category.createdate",
+                "label": "translate:jira_knowledgebase_sync.category.createdate",
                 "not_required": "",
                 "no_db": "0",
                 "only_empty": "1",
                 "format": "Y-m-d H:i:s"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 7,
                 "type_id": "value",
                 "type_name": "be_user",
@@ -134,13 +134,13 @@
                 "list_hidden": 0,
                 "search": 0,
                 "name": "createuser",
-                "label": "translate:blaupause.category.createuser",
+                "label": "translate:jira_knowledgebase_sync.category.createuser",
                 "not_required": "",
                 "only_empty": "1",
                 "show_value": "0"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 8,
                 "type_id": "value",
                 "type_name": "datestamp",
@@ -148,14 +148,14 @@
                 "list_hidden": 0,
                 "search": 0,
                 "name": "updatedate",
-                "label": "translate:blaupause.category.updatedate",
+                "label": "translate:jira_knowledgebase_sync.category.updatedate",
                 "not_required": "",
                 "no_db": "0",
                 "only_empty": "0",
                 "format": "Y-m-d H:i:s"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 9,
                 "type_id": "value",
                 "type_name": "be_user",
@@ -163,13 +163,13 @@
                 "list_hidden": 0,
                 "search": 0,
                 "name": "updateuser",
-                "label": "translate:blaupause.category.updateuser",
+                "label": "translate:jira_knowledgebase_sync.category.updateuser",
                 "not_required": "",
                 "only_empty": "0",
                 "show_value": "0"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 10,
                 "type_id": "value",
                 "type_name": "uuid",
@@ -177,13 +177,13 @@
                 "list_hidden": 1,
                 "search": 0,
                 "name": "uuid",
-                "label": "translate:blaupause.category.uuid",
+                "label": "translate:jira_knowledgebase_sync.category.uuid",
                 "not_required": "",
                 "no_db": "0",
                 "show_value": "0"
             },
             {
-                "table_name": "rex_blaupause_category",
+                "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 11,
                 "type_id": "validate",
                 "type_name": "unique",
@@ -193,7 +193,7 @@
                 "name": "uuid",
                 "label": "",
                 "not_required": "",
-                "message": "translate:blaupause.category.uuid.validate.unique",
+                "message": "translate:jira_knowledgebase_sync.category.uuid.validate.unique",
                 "empty_option": "0",
                 "table": ""
             }

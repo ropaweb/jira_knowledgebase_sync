@@ -1,11 +1,11 @@
 <?php
 
-echo rex_view::title(rex_i18n::msg('blaupause.title'));
+echo rex_view::title(rex_i18n::msg('jira_knowledgebase_sync.title'));
 
 $yform = $this->getProperty('yform', []);
 $yform = $yform[rex_be_controller::getCurrentPage()] ?? [];
 
-$table_name = 'rex_blaupause_entry';
+$table_name = 'rex_jira_knowledgebase_sync_category';
 
 rex_extension::register(
     'YFORM_MANAGER_DATA_PAGE_HEADER',

@@ -1,9 +1,9 @@
-# Blaupause - Dieses Repository kopieren, anpassen, AddOn-Entwicklung für REDAXO starten
+# JiraKnowledgebaseSync - Dieses Repository kopieren, anpassen, AddOn-Entwicklung für REDAXO starten
 
 Vorlage für REDAXO-Addons für einen schnelleren Start bei der Addon-Entwicklung.
 
-1. <https://github.com/alexplusde/blaupause/archive/refs/heads/main.zip> ZIP der aktuellen Vorlage herunterladen oder direkt in GitHub ein Repo auf Basis von `alexplusde/blaupause` erstellen: <https://github.com/new/import> und dort `https://github.com/alexplusde/blaupause.git` angeben.
-2. Mit "Suchen und Ersetzen" alles, was `blaupause` heißt, durch den Namen deines Addons ersetzen, z.B. `supi-dupi-kalender`, und speichern. Sowohl Dateinamen, als auch Dateiinhalte.
+1. <https://github.com/alexplusde/jira_knowledgebase_sync/archive/refs/heads/main.zip> ZIP der aktuellen Vorlage herunterladen oder direkt in GitHub ein Repo auf Basis von `alexplusde/jira_knowledgebase_sync` erstellen: <https://github.com/new/import> und dort `https://github.com/alexplusde/jira_knowledgebase_sync.git` angeben.
+2. Mit "Suchen und Ersetzen" alles, was `jira_knowledgebase_sync` heißt, durch den Namen deines Addons ersetzen, z.B. `supi-dupi-kalender`, und speichern. Sowohl Dateinamen, als auch Dateiinhalte.
 3. Alles löschen, was du aktuell nicht brauchst (oder für später auskommentiert lassen)
 
 ## Features
@@ -20,7 +20,7 @@ Gängige Code-Beispiele wie der Syntax zum Überprüfen einer Addon-Installation
 
 Gängige Code-Beispiele zum Installieren von YForm-Tablesets, Meta-Infofeldern und dem Verwenden von Extension Points, Cronjobs u.a.
 
-### `rex_blaupause.tableset.json` und `pages/blaupause.table.php` für YForm im Addon
+### `rex_jira_knowledgebase_sync.tableset.json` und `pages/jira_knowledgebase_sync.table.php` für YForm im Addon
 
 Dein Addon nutzt YForm als Ausgangsbasis? Importiere bei der Installation dein Tableset und nutze YForm-Tabellen innerhalb deiner Addon-Seiten.
 
@@ -32,21 +32,21 @@ Gängige Code-Beispiele, die in Abhängigkeit der Vorgänger-Version deines Addo
 
 Alle Code-Beispiele, die du in der `install.php` nutzt, können hier wieder rückkgängig gemacht werden.
 
-### `lib/blaupause.php`
+### `lib/jira_knowledgebase_sync.php`
 
 Liefere passende YOrm Dataset-Methoden mit deinem Addon. Diese kannst du dir ganz einfach mithilfe von <https://github.com/alexplusde/ymca> erstellen lassen, wenn dein Tableset soweit fertig ist.
 
 ### `lang/`
 
-Blaupause für deine eigenen Sprachdateien. Beginne die Addon-Entwicklung direkt so, dass weitere Sprachen ohne Anpassungen ergänzt werden können. Dazu kannst du in REDAXO an verschiedenen Stellen `rex_i18n::msg('blaupause_key')` nutzen oder `translate:blaupause_key` in YForm-Tabellen und Modulnamen.
+JiraKnowledgebaseSync für deine eigenen Sprachdateien. Beginne die Addon-Entwicklung direkt so, dass weitere Sprachen ohne Anpassungen ergänzt werden können. Dazu kannst du in REDAXO an verschiedenen Stellen `rex_i18n::msg('jira_knowledgebase_sync_key')` nutzen oder `translate:jira_knowledgebase_sync_key` in YForm-Tabellen und Modulnamen.
 
-### `pages/blaupause.settings.php`
+### `pages/jira_knowledgebase_sync.settings.php`
 
-Blaupause für die Einstellungsseite deines Addons. Passe die Einstellungsseite an deine Bedürfnisse an und nutze die REDAXO-Formularklassen `rex_config_form` und `rex_form`.
+JiraKnowledgebaseSync für die Einstellungsseite deines Addons. Passe die Einstellungsseite an deine Bedürfnisse an und nutze die REDAXO-Formularklassen `rex_config_form` und `rex_form`.
 
 ### `fragments/`
 
-Blaupause für die Nutzung eigener Fragmente.
+JiraKnowledgebaseSync für die Nutzung eigener Fragmente.
 
 ### `wildcard/`
 
@@ -62,7 +62,7 @@ Beginne mit einem Konfigurations-Formular, das bereits best practice in REDAXO u
 
 ## Lizenz
 
-MIT Lizenz, siehe [LICENSE.md](https://github.com/alexplusde/blaupause/blob/master/LICENSE.md)  
+MIT Lizenz, siehe [LICENSE.md](https://github.com/alexplusde/jira_knowledgebase_sync/blob/master/LICENSE.md)  
 
 ## Autoren
 
