@@ -1,10 +1,9 @@
 # Suche mit regex nach ` *#.*$` und ersetze durch ``, um Kommentare zu entfernen
 
 package: jira_knowledgebase_sync # Addon-Key, ggf. wie er bei MyREDAXO hinterlegt ist.
-version: '2.1.0-dev-2025-02-15' # Aktuelle Version. 
-author: 'Alexander Walther' # Name(n) der Autoren, wird im Installer gezeigt
-supportpage: https://github.com/alexplusde/jira_knowledgebase_sync # Support-Seite, wird im Installer gezeigt
-# load: late 
+version: '0.0.1-dev-2025-02-21' # Aktuelle Version. 
+author: 'Iris Werner' # Name(n) der Autoren, wird im Installer gezeigt
+supportpage: https://github.com/ropaweb/jira_knowledgebase_sync # Support-Seite, wird im Installer gezeigt
 
 requires:                       # Abhängigkeiten definieren, z.B.
     php:
@@ -12,23 +11,11 @@ requires:                       # Abhängigkeiten definieren, z.B.
     redaxo: ^5.16              # REDAXO Core-Version
     packages:                  # Plugins und Addons
         yform: "^4"
-#       tracks: "^4"
-#       cronjob: ">1"
-#       metainfo: ">2"
-
-# conflicts:
-#    packages:
-#        - package: "<4" # Konflikte mit Versionen von anderen Addons
-
-page:
-    title: translate:jira_knowledgebase_sync.title    # Übersetzung definieren in lang/de_de.lang
-    prio: 100                       # Reihenfolge in Relation zur Prio anderer Menüeinträge 
-    icon: rex-icon fa-gear
+        cronjob: ">1"
 
 pages:
     jira_knowledgebase_sync: # key, unter dem die Seite zu finden sein wird. Passende Datei im Addon-Verzeichnis `pages/jira_knowledgebase_sync.jira_knowledgebase_syncpage.php` muss vorhanden sein.
         title: translate:jira_knowledgebase_sync.title
-#        main: true                 
         block: system               # 'system', um ins Hauptmenü zu verschieben, oder 'jira_knowledgebase_sync', um eigenen jira_knowledgebase_sync-Abschnitt zu erstellen. Weglassen, um bei den Addons gelistet zu werden 
         prio: 15                    # Reihenfolge in Abhängigkeit anderer Addons
         icon: rex-icon fa-document  # Icon neben dem Menüpunkt
@@ -55,7 +42,7 @@ pages:
                 perm: jira_knowledgebase_sync[docs]
 
 default_config:
-    field: 'Test' # Bei der Installation belegt REDAXO automatisch in der rex_config-Tabelle im Namespace `jira_knowledgebase_sync` im Feld `field` den Wert `Test` 
+    api_key: ' ' # Bei der Installation belegt REDAXO automatisch in der rex_config-Tabelle im Namespace `jira_knowledgebase_sync` im Feld `field` den Wert `Test` 
 
 installer_ignore:
 - .git

@@ -7,7 +7,7 @@ use rex_i18n;
 
 /* Umbenennen, z.B. in Sync, Task */
 
-class Task extends rex_cronjob
+class Sync extends rex_cronjob
 {
     public function execute()
     {
