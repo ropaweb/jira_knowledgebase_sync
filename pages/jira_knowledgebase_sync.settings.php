@@ -23,7 +23,6 @@ $field = $form->addInputField('text', 'api_key', null, ['class' => 'form-control
 $field->setLabel(rex_i18n::msg('jira_knowledgebase_sync_config_api_key_label'));
 $field->setNotice(rex_i18n::msg('jira_knowledgebase_sync_config_api_key_notice'));
 
-
 $fragment = new rex_fragment();
 $fragment->setVar('class', 'edit', false);
 $fragment->setVar('title', $addon->i18n('jira_knowledgebase_sync_config'), false);
