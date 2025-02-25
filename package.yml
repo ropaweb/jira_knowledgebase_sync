@@ -13,6 +13,9 @@ requires:                       # Abhängigkeiten definieren, z.B.
         yform: "^4"
         cronjob: ">1"
 
+page:
+    title: 'translate:jira_knowledgebase_sync.title'
+
 pages:
     jira_knowledgebase_sync: # key, unter dem die Seite zu finden sein wird. Passende Datei im Addon-Verzeichnis `pages/jira_knowledgebase_sync.jira_knowledgebase_syncpage.php` muss vorhanden sein.
         title: translate:jira_knowledgebase_sync.title
@@ -22,20 +25,20 @@ pages:
         perm: jira_knowledgebase_sync[]               # Berechtigung, die einer Rolle zugewiesen werden kann. z.B. `admin` für Admin, oder `jira_knowledgebase_sync['xyz']` für dein eigenes Addon
         subpages:                   # Automatisches Untermenü unterhalb des Reisters von `jira_knowledgebase_syncpage` erzeugen
             entry:
-                title: translate:jira_knowledgebase_sync_table
+                title: translate:jira_knowledgebase_sync.table.entry
                 icon: rex-icon fa-document
                 perm: jira_knowledgebase_sync[entry]
             category:
-                title: translate:jira_knowledgebase_sync_table
+                title: translate:jira_knowledgebase_sync.table.category
                 icon: rex-icon fa-folder
                 perm: jira_knowledgebase_sync[category]
             settings:
-                title: translate:jira_knowledgebase_sync_settings
+                title: translate:jira_knowledgebase_sync.settings
                 icon: rex-icon fa-gear
                 itemClass: pull-right
                 perm: admin
             docs:
-                title: translate:jira_knowledgebase_sync_docs
+                title: translate:jira_knowledgebase_sync.docs
                 subPath: README.md  # Gibt anstelle einer Seite unter `pages` die README.md des Addons aus
                 icon: rex-icon fa-info-circle
                 itemClass: pull-right

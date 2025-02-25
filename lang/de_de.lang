@@ -1,8 +1,9 @@
-jira_knowledgebase_sync.title = JiraKnowledgebaseSync # Titel des Addons
+jira_knowledgebase_sync.title = Jira Knowledgebase-Syncronisation
 
 # Menüpunkte
 
-jira_knowledgebase_sync.table = JiraKnowledgebaseSync
+jira_knowledgebase_sync.table.entry = FAQ Artikel
+jira_knowledgebase_sync.table.category = FAQ Kategorien
 jira_knowledgebase_sync.settings = Einstellungen
 jira_knowledgebase_sync.docs = Hilfe
 
@@ -12,8 +13,15 @@ jira_knowledgebase_sync.docs = Hilfe
 # Konfigurationsformulare
 
 jira_knowledgebase_sync_config = Einstellungen
-jira_knowledgebase_sync_config_mytextfield_label = Test-Feld
-jira_knowledgebase_sync_config_mytextfield_notice = Notiz, die etwas erklärt und bspw. einen Standardwert nennt. Hier: <code>Test</code>
+#jira_knowledgebase_sync_config_mytextfield_label = Test-Feld
+#jira_knowledgebase_sync_config_mytextfield_notice = Notiz, die etwas erklärt und bspw. einen Standardwert nennt. Hier: <code>Test</code>
+jira_knowledgebase_sync_config_url_label = Jira-URL
+jira_knowledgebase_sync_config_url_notice = Hier muss die Jira-URL hinterlegt werden.
+jira_knowledgebase_sync_config_user_label = Jira Username
+jira_knowledgebase_sync_config_user_notice = Hier muss der Jira Username hinterlegt werden.
+jira_knowledgebase_sync_config_api_key_label = Jira-API-Key
+jira_knowledgebase_sync_config_api_key_notice = Hier muss der Jira-Api-Key hinterlegt werden.
+
 
 # YForm Tabellen-Übersetzung
 
@@ -42,3 +50,14 @@ jira_knowledgebase_sync.entry.createuser = Erstellt von
 jira_knowledgebase_sync.entry.updatedate = Aktualisiert am
 jira_knowledgebase_sync.entry.updateuser = Aktualisiert von
 jira_knowledgebase_sync.entry.uuid = UUID
+
+
+# CronJob
+
+jira_knowledgebase_sync_cronjob_task_name = JiraSync - Einträge holen
+
+# CronJob Errors
+jira_knowledgebase_sync_cronjob_task_error_connection = Verbindungsdaten konnten nicht ausgelesen werden
+jira_knowledgebase_sync_cronjob_task_error = Fehler: 
+
+jira_knowledgebase_sync_cronjob_task_success = %s Beiträge wurden erfolgreich synchronisiert (Erstellt: %s, aktualisiert %s)
