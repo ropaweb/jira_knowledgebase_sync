@@ -1,60 +1,24 @@
-# JiraKnowledgebaseSync - Dieses Repository kopieren, anpassen, AddOn-Entwicklung für REDAXO starten
+# Jira Knowledgebase-Sync Add-on für REDAXO 5
 
-Vorlage für REDAXO-Addons für einen schnelleren Start bei der Addon-Entwicklung.
-
-1. <https://github.com/alexplusde/jira_knowledgebase_sync/archive/refs/heads/main.zip> ZIP der aktuellen Vorlage herunterladen oder direkt in GitHub ein Repo auf Basis von `alexplusde/jira_knowledgebase_sync` erstellen: <https://github.com/new/import> und dort `https://github.com/alexplusde/jira_knowledgebase_sync.git` angeben.
-2. Mit "Suchen und Ersetzen" alles, was `jira_knowledgebase_sync` heißt, durch den Namen deines Addons ersetzen, z.B. `supi-dupi-kalender`, und speichern. Sowohl Dateinamen, als auch Dateiinhalte.
-3. Alles löschen, was du aktuell nicht brauchst (oder für später auskommentiert lassen)
+Synchronisiere Jira-Knowledgebase-Artikel mit deiner REDAXO-Installation, basierend auf YForm und YOrm.
 
 ## Features
 
-### `package.yml`
+### `Ropaweb\JiraKnowledgebaseSync\Entry`
 
-Bei Bedarf Abhängigkeiten von REDAXO-AddOns (sog. packages) eintragen, Backend-Seiten aus oder einblenden, vordefinierte Konfigurationswerte setzen.
+Ein Jira-Knowledgebase-Artikel wird als `Entry`-Objekt repräsentiert. Es enthält alle relevanten Informationen, die für die Synchronisation mit REDAXO benötigt werden.
 
-### `boot.php`
+### `RopaWeb\JiraKnowledgebaseSync\Category`
 
-Gängige Code-Beispiele wie der Syntax zum Überprüfen einer Addon-Installation, der Unterscheidung zwischen Front- und Backend, dem Registrieren eigener YForm-Dataset-Klasen.
+Eine Kategorie in Jira wird als `Category`-Objekt repräsentiert.
 
-### `install.php`
+### Cronjob `Ropaweb\JiraKnowledgebaseSync\Cronjob\Sync`
 
-Gängige Code-Beispiele zum Installieren von YForm-Tablesets, Meta-Infofeldern und dem Verwenden von Extension Points, Cronjobs u.a.
+Synchronisiert Jira-Knowledgebase-Artikel mit REDAXO-Artikeln.
 
-### `rex_jira_knowledgebase_sync.tableset.json` und `pages/jira_knowledgebase_sync.table.php` für YForm im Addon
+### Einstellungen
 
-Dein Addon nutzt YForm als Ausgangsbasis? Importiere bei der Installation dein Tableset und nutze YForm-Tabellen innerhalb deiner Addon-Seiten.
-
-### `update.php`
-
-Gängige Code-Beispiele, die in Abhängigkeit der Vorgänger-Version deines Addons ausgeführt werden.
-
-### `uninstall.php`
-
-Alle Code-Beispiele, die du in der `install.php` nutzt, können hier wieder rückkgängig gemacht werden.
-
-### `lib/jira_knowledgebase_sync.php`
-
-Liefere passende YOrm Dataset-Methoden mit deinem Addon. Diese kannst du dir ganz einfach mithilfe von <https://github.com/alexplusde/ymca> erstellen lassen, wenn dein Tableset soweit fertig ist.
-
-### `lang/`
-
-JiraKnowledgebaseSync für deine eigenen Sprachdateien. Beginne die Addon-Entwicklung direkt so, dass weitere Sprachen ohne Anpassungen ergänzt werden können. Dazu kannst du in REDAXO an verschiedenen Stellen `rex_i18n::msg('jira_knowledgebase_sync_key')` nutzen oder `translate:jira_knowledgebase_sync_key` in YForm-Tabellen und Modulnamen.
-
-### `pages/jira_knowledgebase_sync.settings.php`
-
-JiraKnowledgebaseSync für die Einstellungsseite deines Addons. Passe die Einstellungsseite an deine Bedürfnisse an und nutze die REDAXO-Formularklassen `rex_config_form` und `rex_form`.
-
-### `fragments/`
-
-JiraKnowledgebaseSync für die Nutzung eigener Fragmente.
-
-### `wildcard/`
-
-In Arbeit: Definiere eigene Sprachkeys für das Addon [Wildcard](https://github.com/alexplusde/wildcard) oder Sprog und lasse diese automatisch installieren und updaten.
-
-### Docs-Seite
-
-Passe diese README.md-Datei an und spiele sie als Hilfe-Seite zu deinem Addon aus. Halte dich an die Struktur dieser README.md-Datei für deine eigenen Addons, indem du die wichtigsten Funktionen, Klassen und Methoden sowie den Installationsprozess und die Funktionsweise erklärst. Mit Verweis auf die Autoren, Projekt-Lead und Credits.
+`url`, `user` und `api_key`: Jira-URL, Benutzername und API-Key für die Authentifizierung.
 
 ### Einstellungs-Seite
 
@@ -66,11 +30,9 @@ MIT Lizenz, siehe [LICENSE.md](https://github.com/alexplusde/jira_knowledgebase_
 
 ## Autoren
 
-**Alexander Walther**  
-<http://www.alexplus.de>  
-<https://github.com/alexplusde>  
-
-**Projekt-Lead**  
-[Alexander Walther](https://github.com/alexplusde)
+* **Iris Werner**: <https://github.com/iriswerner>
 
 ## Credits
+
+* **Alexander Walther**: <https://github.com/alxndr-w>
+* Basierend auf **Blaupause**: <https://github.com/alexplusde/blaupause>
