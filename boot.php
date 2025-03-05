@@ -26,6 +26,7 @@ if (rex_addon::get('yform')->isAvailable() && !rex::isSafeMode()) {
 // Prüfen, ob ein anderes Addon installiert ist, bspw. Cronjob-Addon
 if (rex_addon::get('cronjob')->isAvailable() && !rex::isSafeMode()) {
     rex_cronjob_manager::registerType(Cronjob\Sync::class);
+    rex_cronjob_manager::registerType(Cronjob\Publish::class);
 }
 
 // Listendarstellung verändern
