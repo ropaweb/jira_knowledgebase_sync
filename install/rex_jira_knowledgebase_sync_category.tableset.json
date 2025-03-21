@@ -26,6 +26,23 @@
                 "table_name": "rex_jira_knowledgebase_sync_category",
                 "prio": 1,
                 "type_id": "value",
+                "type_name": "prio",
+                "db_type": "int",
+                "list_hidden": 0,
+                "search": 0,
+                "name": "prio",
+                "label": "Reihenfolge",
+                "not_required": "",
+                "attributes": "",
+                "default": "1",
+                "notice": "",
+                "fields": "name",
+                "scope": ""
+            },
+            {
+                "table_name": "rex_jira_knowledgebase_sync_category",
+                "prio": 2,
+                "type_id": "value",
                 "type_name": "text",
                 "db_type": "varchar(191)",
                 "list_hidden": 0,
@@ -42,7 +59,7 @@
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 2,
+                "prio": 3,
                 "type_id": "validate",
                 "type_name": "empty",
                 "db_type": "",
@@ -55,26 +72,29 @@
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 3,
+                "prio": 4,
                 "type_id": "value",
                 "type_name": "be_manager_relation",
-                "db_type": "int(10) unsigned",
-                "list_hidden": 0,
+                "db_type": "int",
+                "list_hidden": 1,
                 "search": 0,
                 "name": "jira_knowledgebase_sync_entry_ids",
                 "label": "translate:jira_knowledgebase_sync.category.jira_knowledgebase_sync_entry_ids",
                 "not_required": "",
                 "attributes": "",
                 "notice": "",
-                "empty_option": "1",
+                "size": "",
                 "table": "rex_jira_knowledgebase_sync_entry",
-                "field": "jira_knowledgebase_sync_category_id",
+                "field": "name",
                 "type": "3",
-                "relation_table": "rex_jira_knowledgebase_sync_entry"
+                "empty_value": "",
+                "empty_option": "1",
+                "relation_table": "",
+                "filter": ""
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 4,
+                "prio": 5,
                 "type_id": "value",
                 "type_name": "choice_status",
                 "db_type": "int",
@@ -99,7 +119,7 @@
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 5,
+                "prio": 6,
                 "type_id": "validate",
                 "type_name": "empty",
                 "db_type": "",
@@ -112,7 +132,7 @@
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 6,
+                "prio": 7,
                 "type_id": "value",
                 "type_name": "datestamp",
                 "db_type": "datetime",
@@ -123,11 +143,12 @@
                 "not_required": "",
                 "no_db": "0",
                 "only_empty": "1",
-                "format": "Y-m-d H:i:s"
+                "format": "Y-m-d H:i:s",
+                "modify_default": ""
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 7,
+                "prio": 8,
                 "type_id": "value",
                 "type_name": "be_user",
                 "db_type": "varchar(191)",
@@ -141,7 +162,7 @@
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 8,
+                "prio": 9,
                 "type_id": "value",
                 "type_name": "datestamp",
                 "db_type": "datetime",
@@ -152,11 +173,12 @@
                 "not_required": "",
                 "no_db": "0",
                 "only_empty": "0",
-                "format": "Y-m-d H:i:s"
+                "format": "Y-m-d H:i:s",
+                "modify_default": ""
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 9,
+                "prio": 10,
                 "type_id": "value",
                 "type_name": "be_user",
                 "db_type": "varchar(191)",
@@ -170,7 +192,7 @@
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 10,
+                "prio": 11,
                 "type_id": "value",
                 "type_name": "uuid",
                 "db_type": "varchar(36)",
@@ -184,7 +206,7 @@
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_category",
-                "prio": 11,
+                "prio": 12,
                 "type_id": "validate",
                 "type_name": "unique",
                 "db_type": "",
@@ -193,9 +215,9 @@
                 "name": "uuid",
                 "label": "",
                 "not_required": "",
-                "message": "translate:jira_knowledgebase_sync.category.uuid.validate.unique",
+                "table": "",
                 "empty_option": "0",
-                "table": ""
+                "message": "translate:jira_knowledgebase_sync.category.uuid.validate.unique"
             }
         ]
     }

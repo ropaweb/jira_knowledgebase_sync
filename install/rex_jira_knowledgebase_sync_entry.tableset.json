@@ -5,10 +5,10 @@
             "table_name": "rex_jira_knowledgebase_sync_entry",
             "name": "translate:jira_knowledgebase_sync.entry.table",
             "description": "",
-            "list_amount": 50,
-            "list_sortfield": "createdate",
+            "list_amount": 20,
+            "list_sortfield": "name",
             "list_sortorder": "DESC",
-            "search": 0,
+            "search": 1,
             "hidden": 1,
             "export": 1,
             "import": 1,
@@ -58,19 +58,22 @@
                 "prio": 3,
                 "type_id": "value",
                 "type_name": "be_manager_relation",
-                "db_type": "int(10) unsigned",
+                "db_type": "int",
                 "list_hidden": 0,
-                "search": 0,
+                "search": 1,
                 "name": "jira_knowledgebase_sync_category_id",
                 "label": "translate:jira_knowledgebase_sync.entry.jira_knowledgebase_sync_category_id",
                 "not_required": "",
                 "attributes": "",
                 "notice": "",
-                "empty_option": "1",
+                "size": "",
                 "table": "rex_jira_knowledgebase_sync_category",
                 "field": "name",
                 "type": "2",
-                "relation_table": ""
+                "empty_value": "",
+                "empty_option": "1",
+                "relation_table": "",
+                "filter": ""
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_entry",
@@ -123,7 +126,8 @@
                 "not_required": "",
                 "no_db": "0",
                 "only_empty": "1",
-                "format": "Y-m-d H:i:s"
+                "format": "Y-m-d H:i:s",
+                "modify_default": ""
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_entry",
@@ -152,7 +156,8 @@
                 "not_required": "",
                 "no_db": "0",
                 "only_empty": "0",
-                "format": "Y-m-d H:i:s"
+                "format": "Y-m-d H:i:s",
+                "modify_default": ""
             },
             {
                 "table_name": "rex_jira_knowledgebase_sync_entry",
@@ -193,9 +198,63 @@
                 "name": "uuid",
                 "label": "",
                 "not_required": "",
-                "message": "translate:jira_knowledgebase_sync.entry.uuid.validate.unique",
+                "table": "",
                 "empty_option": "0",
-                "table": ""
+                "message": "translate:jira_knowledgebase_sync.entry.uuid.validate.unique"
+            },
+            {
+                "table_name": "rex_jira_knowledgebase_sync_entry",
+                "prio": 12,
+                "type_id": "value",
+                "type_name": "number",
+                "db_type": "",
+                "list_hidden": 0,
+                "search": 1,
+                "name": "jiraid",
+                "label": "Jira-ID (pageId)",
+                "not_required": "",
+                "attributes": "",
+                "default": "",
+                "no_db": "0",
+                "notice": "",
+                "widget": "input:text",
+                "unit": "",
+                "precision": "10",
+                "scale": "0"
+            },
+            {
+                "table_name": "rex_jira_knowledgebase_sync_entry",
+                "prio": 13,
+                "type_id": "value",
+                "type_name": "text",
+                "db_type": "varchar(191)",
+                "list_hidden": 1,
+                "search": 1,
+                "name": "jiraproject",
+                "label": "Jira-Projekt (spaceKey)",
+                "not_required": "",
+                "attributes": "",
+                "default": "",
+                "no_db": "0",
+                "notice": "",
+                "append": "",
+                "prepend": ""
+            },
+            {
+                "table_name": "rex_jira_knowledgebase_sync_entry",
+                "prio": 14,
+                "type_id": "value",
+                "type_name": "textarea",
+                "db_type": "text",
+                "list_hidden": 1,
+                "search": 0,
+                "name": "jiracontent",
+                "label": "Jira-Content (content)",
+                "not_required": "",
+                "attributes": "",
+                "default": "",
+                "no_db": "0",
+                "notice": ""
             }
         ]
     }
