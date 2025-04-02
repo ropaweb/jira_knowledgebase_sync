@@ -15,13 +15,14 @@ requires:                       # Abhängigkeiten definieren, z.B.
 
 page:
     title: 'translate:jira_knowledgebase_sync.title'
+    icon: 'rex-icon fa-arrows-rotate'
 
 pages:
     jira_knowledgebase_sync: # key, unter dem die Seite zu finden sein wird. Passende Datei im Addon-Verzeichnis `pages/jira_knowledgebase_sync.jira_knowledgebase_syncpage.php` muss vorhanden sein.
         title: translate:jira_knowledgebase_sync.title
         block: system               # 'system', um ins Hauptmenü zu verschieben, oder 'jira_knowledgebase_sync', um eigenen jira_knowledgebase_sync-Abschnitt zu erstellen. Weglassen, um bei den Addons gelistet zu werden 
         prio: 15                    # Reihenfolge in Abhängigkeit anderer Addons
-        icon: rex-icon fa-document  # Icon neben dem Menüpunkt
+        icon: rex-icon fa-arrows-rotate  # Icon neben dem Menüpunkt
         perm: jira_knowledgebase_sync[]               # Berechtigung, die einer Rolle zugewiesen werden kann. z.B. `admin` für Admin, oder `jira_knowledgebase_sync['xyz']` für dein eigenes Addon
         subpages:                   # Automatisches Untermenü unterhalb des Reisters von `jira_knowledgebase_syncpage` erzeugen
             entry:
