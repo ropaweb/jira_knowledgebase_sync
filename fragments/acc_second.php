@@ -9,7 +9,7 @@ $counter_j = $this->getVar('counter_j');
 $acc_name = $this->getVar('acc_name');
 
 /** @var string $acc_jiracontent */
-$acc_jiracontent = $this->getVar('acc_jiracontent');?>
+$acc_jiracontent = $this->getVar('acc_jiracontent')?>
 
 <!-- Zweite Ebene Accordion-->
 <div class="accordion-item">
@@ -20,9 +20,9 @@ $acc_jiracontent = $this->getVar('acc_jiracontent');?>
                     <b><?= $acc_name ?></b>
         </button>
     </h2>
-    <div id="generalAnswer-<?= $counter_j?>" 
+    <div id="generalAnswer-<?= $counter_j?>"
          class="accordion-collapse collapse"
-         aria-labelledby="generalQuestion-<?= $counter_j?>" 
+         aria-labelledby="generalQuestion-<?= $counter_j?>"
          data-bs-parent="#generalAccordion-<?= $counter_i ?>">
         <div class="accordion-body">
             <?= $acc_jiracontent ?>
