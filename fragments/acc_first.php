@@ -1,5 +1,6 @@
 <?php
 use Ropaweb\JiraKnowledgebaseSync\Entry;
+
 /** @var rex_fragment $this */
 /** @var int $counter_i */
 $counter_i = $this->getVar('counter_i');
