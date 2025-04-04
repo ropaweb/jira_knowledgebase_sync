@@ -1,7 +1,7 @@
 # Suche mit regex nach ` *#.*$` und ersetze durch ``, um Kommentare zu entfernen
 
 package: jira_knowledgebase_sync # Addon-Key, ggf. wie er bei MyREDAXO hinterlegt ist.
-version: '0.0.1-dev-2025-02-21' # Aktuelle Version. 
+version: '0.0.1-dev-2025-04-04' # Aktuelle Version. 
 author: 'Iris Werner' # Name(n) der Autoren, wird im Installer gezeigt
 supportpage: https://github.com/ropaweb/jira_knowledgebase_sync # Support-Seite, wird im Installer gezeigt
 
