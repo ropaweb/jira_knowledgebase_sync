@@ -32,11 +32,11 @@ $j = 1;
             <?php
                 //  Accordion Header
                 $this->setVar('category_name', $category->getName(), false);
-                echo $this->subfragment('acc_first_header.php');
+                echo $this->subfragment('jira_knowledgebase_sync/accordion_first_header.php');
 
             ?>
 
-            <div id="collapseGeneral-<?= $counter_i ?>" class="accordion-collapse main-accordion collapse" aria-labelledby="headingGeneral"
+            <div id="collapseGeneral-<?= $counter_i ?>" class="accordion-collapse main-accordion collapse" aria-labelledby="headingGeneral">
                 <div id="collapseGeneral-<?= $counter_i ?>"
                 class="accordion-collapse collapse"
                 aria-labelledby="heading-General-<?= $counter_i ?>"
@@ -54,7 +54,7 @@ $j = 1;
                             $this->setVar('acc_name', $acc->name, false);
                             $this->setVar('acc_jiracontent', $acc->jiracontent, false);
 
-                            echo $this->subfragment('acc_second.php');
+                            echo $this->subfragment('jira_knowledgebase_sync/accordion_second.php');
 
                             ++$j;
                         } // end of foreach
