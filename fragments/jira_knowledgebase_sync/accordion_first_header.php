@@ -7,6 +7,7 @@
 ?>
 
 
+
     <h2 class="accordion-header"
         id="heading-General-<?= $counter_i ?>">
         <button
