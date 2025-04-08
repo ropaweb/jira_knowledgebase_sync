@@ -180,11 +180,13 @@ class Sync extends rex_cronjob
     {
         $iframe_content = file_get_contents($content_link);
 
-        $start_pos = strpos($iframe_content, '<div id="content">');
-        $end_pos = strpos($iframe_content, '</div>', $start_pos) + strlen('</div>');
-        $modified_iframe_content = substr($iframe_content, $start_pos, $end_pos - $start_pos);
+        $dom = new DOMDocument();
+        libxml_use_internal_errors(true); // Suppress warnings for invalid HTML
+        $dom->loadHTML($iframe_content);
+        libxml_clear_errors();
 
-        $modified_iframe_content .= '</div>'; // Schließe das div-Tag
+        $content_div = $dom->getElementById('content');
+        $modified_iframe_content = $content_div ? $dom->saveHTML($content_div) : '';
 
         return $modified_iframe_content;
     }
