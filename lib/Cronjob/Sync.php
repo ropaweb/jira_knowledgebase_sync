@@ -17,6 +17,7 @@ use const CURLOPT_USERPWD;
 
 class Sync extends rex_cronjob
 {
+    
     private const ENDPOINT = '/rest/servicedeskapi/knowledgebase/article';
 
     /** @var array<string,array<string,int>> */
@@ -148,6 +149,8 @@ class Sync extends rex_cronjob
             $entry->setValue('jiraid', $current['source']['pageId']);
             $entry->setValue('status', 0);
             $entry->setValue('createdate', date('Y-m-d H:i:s'));
+            // Für neue Einträge immer die Kategorie 6 verwenden, dann können diese gefunden werden
+            $entry->setValue('jira_knowledgebase_sync_category_id', 6);
 
             // User lässt sich nicht überschreiben immer der Benutzer der als API-Key-User hinterlegt ist
             // $entry->setValue('createuser', 'JiraSyncCron');
@@ -164,9 +167,9 @@ class Sync extends rex_cronjob
 
         // Content aus iframeSrc holen
         // klappt lokal nicht
-        $content = $this->getContent($current['content']['iframeSrc']);
-        $entry->setValue('jiracontent', $content);
-        //$entry->setValue('jiracontent', $current['content']['iframeSrc']);
+        //$content = $this->getContent($current['content']['iframeSrc']);
+        //$entry->setValue('jiracontent', $content);
+        $entry->setValue('jiracontent', $current['content']['iframeSrc']);
 
         $entry->setValue('updatedate', date('Y-m-d H:i:s'));
 
