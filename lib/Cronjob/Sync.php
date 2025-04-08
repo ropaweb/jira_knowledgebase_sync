@@ -26,7 +26,20 @@ class Sync extends rex_cronjob
 
     public function execute()
     {
-        $fields = $this->getParamFields();
+        $addon = rex_addon::get('jira_knowledgebase_sync');
+        $params = $addon->getConfig();
+
+        $fields = [
+            'url' => $params['url'],
+            'user' => $params['user'],
+            'key' => $params['api_key'],
+        ];
+
+        if (empty($fields['url']) || empty($fields['user']) || empty($fields['key'])) {
+            $this->setMessage(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_error_connection'));
+            return false;
+        }
+
         $i = 1;
         $start = 0;
         $cursor = '';
@@ -101,6 +114,7 @@ class Sync extends rex_cronjob
         return rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_name');
     }
 
+    /*
     public function getParamFields()
     {
         $addon = rex_addon::get('jira_knowledgebase_sync');
@@ -118,7 +132,7 @@ class Sync extends rex_cronjob
         }
         return $fields;
     }
-
+    */
     public function createEntry(array $current): void
     {
         // dump($current);
@@ -150,9 +164,9 @@ class Sync extends rex_cronjob
 
         // Content aus iframeSrc holen
         // klappt lokal nicht
-        // $content = $this->getContent($current['content']['iframeSrc']);
-        // $entry->setValue('jiracontent', $content);
-        $entry->setValue('jiracontent', $current['content']['iframeSrc']);
+        $content = $this->getContent($current['content']['iframeSrc']);
+        $entry->setValue('jiracontent', $content);
+        //$entry->setValue('jiracontent', $current['content']['iframeSrc']);
 
         $entry->setValue('updatedate', date('Y-m-d H:i:s'));
 
@@ -169,6 +183,8 @@ class Sync extends rex_cronjob
         $start_pos = strpos($iframe_content, '<div id="content">');
         $end_pos = strpos($iframe_content, '</div>', $start_pos) + strlen('</div>');
         $modified_iframe_content = substr($iframe_content, $start_pos, $end_pos - $start_pos);
+
+        $modified_iframe_content .= '</div>'; // Schließe das div-Tag
 
         return $modified_iframe_content;
     }
