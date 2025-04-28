@@ -23,7 +23,6 @@ if ($count_categories > 1):
 	<?php
 
         foreach ($categories as $category) {
-
             $entry = Entry::query()->where('jira_knowledgebase_sync_category_id', $category->getId())->where('jiraproject', $project_code)->where('status', 1)->orderBy('name', 'ASC')->find();
             // dump($entry);
             ?>
@@ -35,9 +34,9 @@ if ($count_categories > 1):
                     $this->setVar('category_name', $category->getName(), false);
                     // i trotz subfragment weitergeben, damit hochzählen klappt
                     $this->setVar('counter_i', $i, false);
-	    echo $this->subfragment('jira_knowledgebase_sync/accordion_first_header.php');
+        echo $this->subfragment('jira_knowledgebase_sync/accordion_first_header.php');
 
-	    ?>
+        ?>
 
 		<div id="collapseGeneral-<?= $i ?>"
 			class="accordion-collapse main-accordion collapse" aria-labelledby="headingGeneral">
@@ -53,18 +52,16 @@ if ($count_categories > 1):
 						id="generalAccordion-<?= $i ?>">
 
 						<?php
-	                foreach ($entry as $acc) {
-	                    // Zweite Accordion Ebene
-	                    $this->setVar('counter_j', $j, false);
-	                    $this->setVar('acc_name', $acc->name, false);
-	                    $this->setVar('acc_jiracontent', $acc->jiracontent, false);
+                    foreach ($entry as $acc) {
+                        // Zweite Accordion Ebene
+                        $this->setVar('counter_j', $j, false);
+                        $this->setVar('acc_name', $acc->name, false);
+                        $this->setVar('acc_jiracontent', $acc->jiracontent, false);
 
                         echo $this->subfragment('jira_knowledgebase_sync/accordion_second.php');
 
-
-
-	                    ++$j;
-	                } // end of foreach
+                        ++$j;
+                    } // end of foreach
             ?>
 
 					</div> <!-- end of generalAccordion !-->

@@ -8,7 +8,6 @@ use rex_i18n;
 use Ropaweb\JiraKnowledgebaseSync\Entry;
 
 use function sprintf;
-use function strlen;
 
 use const CURLOPT_HTTPHEADER;
 use const CURLOPT_RETURNTRANSFER;
@@ -166,7 +165,7 @@ class Sync extends rex_cronjob
         // klappt lokal nicht
         $content = $this->getContent($current['content']['iframeSrc']);
         $entry->setValue('jiracontent', $content);
-        //$entry->setValue('jiracontent', $current['content']['iframeSrc']);
+        // $entry->setValue('jiracontent', $current['content']['iframeSrc']);
 
         $entry->setValue('updatedate', date('Y-m-d H:i:s'));
 
