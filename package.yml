@@ -1,15 +1,13 @@
-# Suche mit regex nach ` *#.*$` und ersetze durch ``, um Kommentare zu entfernen
+package: jira_knowledgebase_sync
+version: '1.0.0'
+author: 'Iris Werner'
+supportpage: https://github.com/ropaweb/jira_knowledgebase_sync
 
-package: jira_knowledgebase_sync # Addon-Key, ggf. wie er bei MyREDAXO hinterlegt ist.
-version: '0.0.1-dev-2025-04-04' # Aktuelle Version. 
-author: 'Iris Werner' # Name(n) der Autoren, wird im Installer gezeigt
-supportpage: https://github.com/ropaweb/jira_knowledgebase_sync # Support-Seite, wird im Installer gezeigt
-
-requires:                       # Abhängigkeiten definieren, z.B.
+requires:
     php:
         version: '>=8.4,<9'
-    redaxo: ^5.16              # REDAXO Core-Version
-    packages:                  # Plugins und Addons
+    redaxo: ^5.16
+    packages:
         yform: "^4"
         cronjob: ">1"
 
@@ -18,13 +16,13 @@ page:
     icon: 'rex-icon fa-arrows-rotate'
 
 pages:
-    jira_knowledgebase_sync: # key, unter dem die Seite zu finden sein wird. Passende Datei im Addon-Verzeichnis `pages/jira_knowledgebase_sync.jira_knowledgebase_syncpage.php` muss vorhanden sein.
+    jira_knowledgebase_sync:
         title: translate:jira_knowledgebase_sync.title
-        block: system               # 'system', um ins Hauptmenü zu verschieben, oder 'jira_knowledgebase_sync', um eigenen jira_knowledgebase_sync-Abschnitt zu erstellen. Weglassen, um bei den Addons gelistet zu werden 
-        prio: 15                    # Reihenfolge in Abhängigkeit anderer Addons
-        icon: rex-icon fa-arrows-rotate  # Icon neben dem Menüpunkt
-        perm: jira_knowledgebase_sync[]               # Berechtigung, die einer Rolle zugewiesen werden kann. z.B. `admin` für Admin, oder `jira_knowledgebase_sync['xyz']` für dein eigenes Addon
-        subpages:                   # Automatisches Untermenü unterhalb des Reisters von `jira_knowledgebase_syncpage` erzeugen
+        block: system
+        prio: 15
+        icon: rex-icon fa-arrows-rotate
+        perm: jira_knowledgebase_sync[]
+        subpages:
             entry:
                 title: translate:jira_knowledgebase_sync.table.entry
                 icon: rex-icon fa-document
@@ -40,13 +38,13 @@ pages:
                 perm: admin
             docs:
                 title: translate:jira_knowledgebase_sync.docs
-                subPath: README.md  # Gibt anstelle einer Seite unter `pages` die README.md des Addons aus
+                subPath: README.md
                 icon: rex-icon fa-info-circle
                 itemClass: pull-right
                 perm: jira_knowledgebase_sync[docs]
 
 default_config:
-    api_key: ' ' # Bei der Installation belegt REDAXO automatisch in der rex_config-Tabelle im Namespace `jira_knowledgebase_sync` im Feld `field` den Wert `Test` 
+    api_key: ' '
 
 installer_ignore:
 - .git
