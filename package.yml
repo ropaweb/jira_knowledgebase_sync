@@ -7,7 +7,7 @@ supportpage: https://github.com/ropaweb/jira_knowledgebase_sync # Support-Seite,
 
 requires:                       # Abhängigkeiten definieren, z.B.
     php:
-        version: '>8.1,<9'
+        version: '>=8.4,<9'
     redaxo: ^5.16              # REDAXO Core-Version
     packages:                  # Plugins und Addons
         yform: "^4"
