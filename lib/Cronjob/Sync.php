@@ -2,6 +2,7 @@
 
 namespace Ropaweb\JiraKnowledgebaseSync\Cronjob;
 
+use DOMDocument;
 use rex_addon;
 use rex_cronjob;
 use rex_i18n;
@@ -9,6 +10,7 @@ use Ropaweb\JiraKnowledgebaseSync\Entry;
 
 use function sprintf;
 
+use const CURLM_OK;
 use const CURLOPT_HTTPHEADER;
 use const CURLOPT_RETURNTRANSFER;
 use const CURLOPT_URL;
@@ -47,7 +49,7 @@ class Sync extends rex_cronjob
         $user = $fields['user'];
         $key = $fields['key'];
 
-        while ($repeat === true) {
+        while (true === $repeat) {
             // Query Parameter festlegen
             $query_params = http_build_query([
                 'query' => "' '",
@@ -97,7 +99,7 @@ class Sync extends rex_cronjob
 
             // Cursor aktualisieren
             $cursor_string = $data['_links']['next'] ?? '';
-            if ($cursor_string && strpos($cursor_string, '&cursor=') !== false) {
+            if ($cursor_string && str_contains($cursor_string, '&cursor=')) {
                 $cursor_start_pos = strpos($cursor_string, '&cursor=');
                 $cursor_end_pos = strpos($cursor_string, '&prev=');
                 $cursor = substr($cursor_string, $cursor_start_pos + 8, $cursor_end_pos - $cursor_start_pos - 8);
@@ -105,7 +107,7 @@ class Sync extends rex_cronjob
                 $cursor = '';
             }
 
-            if (isset($data['isLastPage']) && $data['isLastPage'] === true) {
+            if (isset($data['isLastPage']) && true === $data['isLastPage']) {
                 $repeat = false;
             }
         }
@@ -115,7 +117,7 @@ class Sync extends rex_cronjob
     }
 
     /**
-     * Holt mehrere Inhalte parallel via curl_multi
+     * Holt mehrere Inhalte parallel via curl_multi.
      */
     private function fetchMultipleContents(array $urls): array
     {
@@ -137,7 +139,7 @@ class Sync extends rex_cronjob
         do {
             $status = curl_multi_exec($multiHandle, $active);
             curl_multi_select($multiHandle);
-        } while ($active && $status == CURLM_OK);
+        } while ($active && CURLM_OK == $status);
 
         foreach ($curlHandles as $i => $ch) {
             $results[$i] = curl_multi_getcontent($ch);
@@ -158,7 +160,7 @@ class Sync extends rex_cronjob
         if (!$iframe_content) {
             return '';
         }
-        $dom = new \DOMDocument();
+        $dom = new DOMDocument();
         libxml_use_internal_errors(true);
         $dom->loadHTML($iframe_content);
         libxml_clear_errors();
@@ -169,7 +171,7 @@ class Sync extends rex_cronjob
     }
 
     /**
-     * createEntry erhält jetzt den fertigen HTML-Content
+     * createEntry erhält jetzt den fertigen HTML-Content.
      */
     public function createEntry(array $current, $content = ''): void
     {
