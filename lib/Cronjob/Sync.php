@@ -2,6 +2,7 @@
 
 namespace Ropaweb\JiraKnowledgebaseSync\Cronjob;
 
+use Dom\HTMLDocument;
 use rex_addon;
 use rex_cronjob;
 use rex_i18n;
@@ -13,6 +14,7 @@ use const CURLOPT_HTTPHEADER;
 use const CURLOPT_RETURNTRANSFER;
 use const CURLOPT_URL;
 use const CURLOPT_USERPWD;
+use const LIBXML_NOERROR;
 
 class Sync extends rex_cronjob
 {
@@ -179,13 +181,11 @@ class Sync extends rex_cronjob
     {
         $iframe_content = file_get_contents($content_link);
 
-        $dom = new DOMDocument();
-        libxml_use_internal_errors(true); // Suppress warnings for invalid HTML
-        $dom->loadHTML($iframe_content);
-        libxml_clear_errors();
+        // PHP 8.4+ HTML5 compliant DOM parser
+        $dom = HTMLDocument::createFromString($iframe_content, LIBXML_NOERROR);
 
         $content_div = $dom->getElementById('content');
-        $modified_iframe_content = $content_div ? $dom->saveHTML($content_div) : '';
+        $modified_iframe_content = $content_div ? $dom->saveHtml($content_div) : '';
 
         return $modified_iframe_content;
     }
