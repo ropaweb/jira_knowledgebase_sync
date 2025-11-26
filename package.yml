@@ -6,7 +6,7 @@ supportpage: https://github.com/ropaweb/jira_knowledgebase_sync
 requires:
     php:
         version: '>=8.4,<9'
-    redaxo: ^5.16
+    redaxo: ^5.18.3
     packages:
         yform: "^4"
         cronjob: ">1"

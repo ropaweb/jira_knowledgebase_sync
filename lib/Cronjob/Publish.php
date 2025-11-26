@@ -24,17 +24,17 @@ class Publish extends rex_cronjob
                 $entry->setValue('status', Entry::STATUS_ACTIVE);
 
                 if (!$entry->save()) {
-                    $this->setMessage(sprintf(rex_i18n::msg('jira_knowledgebase_sync_publish_save_error'), $entry->jiraid));
+                    $this->setMessage(sprintf(rex_i18n::msg('publish_save_error'), $entry->jiraid));
                     return false;
                 }
 
                 ++$i;
-                $this->setMessage(sprintf(rex_i18n::msg('jira_knowledgebase_sync_publish_task_success'), $i));
+                $this->setMessage(sprintf(rex_i18n::msg('publish_task_success'), $i));
             }
         }
 
         if (0 == $i) {
-            $this->setMessage(rex_i18n::msg('jira_knowledgebase_sync_publish_task_no_entries'));
+            $this->setMessage(rex_i18n::msg('publish_task_no_entries'));
         }
 
         return true;
@@ -42,7 +42,7 @@ class Publish extends rex_cronjob
 
     public function getTypeName()
     {
-        return rex_i18n::msg('jira_knowledgebase_sync_publish_task_name');
+        return rex_i18n::msg('publish_task_name');
     }
 
     public function getParamFields()

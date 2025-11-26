@@ -35,7 +35,7 @@ class Sync extends rex_cronjob
         ];
 
         if (empty($fields['url']) || empty($fields['user']) || empty($fields['key'])) {
-            $this->setMessage(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_error_connection'));
+            $this->setMessage(rex_i18n::msg('cronjob_task_error_connection'));
             return false;
         }
 
@@ -75,7 +75,7 @@ class Sync extends rex_cronjob
             $response = curl_exec($ch);
 
             if (curl_errno($ch)) {
-                $this->setMessage(sprintf(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_error'), curl_error($ch)));
+                $this->setMessage(sprintf(rex_i18n::msg('cronjob_task_error'), curl_error($ch)));
                 return false;
             }
 
@@ -104,13 +104,13 @@ class Sync extends rex_cronjob
             }
         }
 
-        $this->setMessage(sprintf(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_success'), $this->counter['entry']['created'] + $this->counter['entry']['updated'], $this->counter['entry']['created'], $this->counter['entry']['updated']));
+        $this->setMessage(sprintf(rex_i18n::msg('cronjob_task_success'), $this->counter['entry']['created'] + $this->counter['entry']['updated'], $this->counter['entry']['created'], $this->counter['entry']['updated']));
         return true;
     }
 
     public function getTypeName()
     {
-        return rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_name');
+        return rex_i18n::msg('cronjob_task_name');
     }
 
     /*
@@ -126,7 +126,7 @@ class Sync extends rex_cronjob
         ];
 
         if (empty($fields['url']) || empty($fields['user']) || empty($fields['key'])) {
-            $this->setMessage(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_error_connection'));
+            $this->setMessage(rex_i18n::msg('cronjob_task_error_connection'));
             return false;
         }
         return $fields;
