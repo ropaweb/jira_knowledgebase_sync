@@ -1,5 +1,5 @@
 package: jira_knowledgebase_sync
-version: '1.0.0'
+version: '1.1.0-dev-2025-11-27'
 author: 'Iris Werner'
 supportpage: https://github.com/ropaweb/jira_knowledgebase_sync
 
