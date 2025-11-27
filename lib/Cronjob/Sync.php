@@ -225,7 +225,7 @@ class Sync extends rex_cronjob
             foreach (['href', 'src'] as $attrName) {
                 if ($element->hasAttribute($attrName)) {
                     $value = $element->getAttribute($attrName);
-                    if (preg_match('/^\s*javascript:/i', $value)) {
+                    if (preg_match('/^\s*(javascript|data):/i', $value)) {
                         $element->removeAttribute($attrName);
                     }
                 }
