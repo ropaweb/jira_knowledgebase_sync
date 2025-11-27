@@ -10,15 +10,21 @@ use Ropaweb\JiraKnowledgebaseSync\Entry;
 
 use function sprintf;
 
+use const CURLINFO_HTTP_CODE;
 use const CURLM_OK;
+use const CURLOPT_CONNECTTIMEOUT;
 use const CURLOPT_HTTPHEADER;
 use const CURLOPT_RETURNTRANSFER;
+use const CURLOPT_TIMEOUT;
 use const CURLOPT_URL;
 use const CURLOPT_USERPWD;
 
 class Sync extends rex_cronjob
 {
     private const ENDPOINT = '/rest/servicedeskapi/knowledgebase/article';
+
+    /** @var array<string> HTML tags to be removed for XSS prevention */
+    private const DISALLOWED_TAGS = ['iframe', 'script', 'object', 'embed', 'link', 'meta', 'body', 'html', 'form', 'button', 'input', 'select'];
 
     /** @var array<string,array<string,int>> */
     private $counter = [
@@ -97,14 +103,15 @@ class Sync extends rex_cronjob
             // Query Parameter neu setzen
             $start += 50;
 
-            // Cursor aktualisieren
+            // Cursor aktualisieren using parse_url/parse_str for safe parsing
             $cursor_string = $data['_links']['next'] ?? '';
-            if ($cursor_string && str_contains($cursor_string, '&cursor=')) {
-                $cursor_start_pos = strpos($cursor_string, '&cursor=');
-                $cursor_end_pos = strpos($cursor_string, '&prev=');
-                $cursor = substr($cursor_string, $cursor_start_pos + 8, $cursor_end_pos - $cursor_start_pos - 8);
-            } else {
-                $cursor = '';
+            $cursor = '';
+            if ($cursor_string) {
+                $parsed_url = parse_url($cursor_string);
+                if (isset($parsed_url['query'])) {
+                    parse_str($parsed_url['query'], $query_params_parsed);
+                    $cursor = $query_params_parsed['cursor'] ?? '';
+                }
             }
 
             if (isset($data['isLastPage']) && true === $data['isLastPage']) {
@@ -132,6 +139,8 @@ class Sync extends rex_cronjob
             }
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
             $curlHandles[$i] = $ch;
             curl_multi_add_handle($multiHandle, $ch);
         }
@@ -142,7 +151,13 @@ class Sync extends rex_cronjob
         } while ($active && CURLM_OK == $status);
 
         foreach ($curlHandles as $i => $ch) {
-            $results[$i] = curl_multi_getcontent($ch);
+            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+            $error = curl_error($ch);
+            if ($error || $httpCode < 200 || $httpCode >= 300) {
+                $results[$i] = '';
+            } else {
+                $results[$i] = curl_multi_getcontent($ch);
+            }
             curl_multi_remove_handle($multiHandle, $ch);
             curl_close($ch);
         }
@@ -166,8 +181,21 @@ class Sync extends rex_cronjob
         libxml_clear_errors();
 
         $content_div = $dom->getElementById('content');
-        $modified_iframe_content = $content_div ? $dom->saveHTML($content_div) : '';
-        return $modified_iframe_content;
+        if (!$content_div) {
+            return '';
+        }
+
+        // Remove disallowed tags for XSS prevention
+        foreach (self::DISALLOWED_TAGS as $tag) {
+            $elements = $content_div->getElementsByTagName($tag);
+            // Iterate backwards to safely remove elements
+            for ($i = $elements->length - 1; $i >= 0; --$i) {
+                $element = $elements->item($i);
+                $element->parentNode->removeChild($element);
+            }
+        }
+
+        return $dom->saveHTML($content_div);
     }
 
     /**
