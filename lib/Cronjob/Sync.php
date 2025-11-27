@@ -274,6 +274,7 @@ class Sync extends rex_cronjob
      *
      * @param array $current  die aktuellen Daten des Eintrags
      * @param string $content der fertige HTML-Content (optional, Standard: leerer String)
+     * @return void
      */
     public function createEntry(array $current, $content = ''): void
     {
