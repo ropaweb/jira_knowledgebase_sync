@@ -262,14 +262,5 @@ class Sync extends rex_cronjob
     public function getTypeName()
     {
         return rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_name');
-        $iframe_content = file_get_contents($content_link);
-
-        // PHP 8.4+ HTML5 compliant DOM parser
-        $dom = HTMLDocument::createFromString($iframe_content, LIBXML_NOERROR);
-
-        $content_div = $dom->getElementById('content');
-        $modified_iframe_content = $content_div ? $dom->saveHtml($content_div) : '';
-
-        return $modified_iframe_content;
     }
 }
