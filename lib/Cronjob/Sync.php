@@ -9,6 +9,7 @@ use rex_cronjob;
 use rex_i18n;
 use Ropaweb\JiraKnowledgebaseSync\Entry;
 
+use function count;
 use function sprintf;
 
 use const CURLINFO_HTTP_CODE;
@@ -36,7 +37,7 @@ class Sync extends rex_cronjob
 
     /** @var array<string,array<string,int>> */
     private $counter = [
-        'entry' => ['created' => 0, 'updated' => 0],
+        'entry' => ['created' => 0, 'updated' => 0, 'deleted' => 0],
     ];
 
     public function execute()
@@ -54,6 +55,12 @@ class Sync extends rex_cronjob
             $this->setMessage(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_error_connection'));
             return false;
         }
+
+        // Get last sync timestamp from configuration for deletion comparison
+        $lastSyncTimestamp = $params['last_sync_timestamp'] ?? null;
+
+        // Record current sync start time
+        $syncStartTime = date('Y-m-d H:i:s');
 
         $start = 0;
         $cursor = '';
@@ -130,7 +137,32 @@ class Sync extends rex_cronjob
             }
         }
 
-        $this->setMessage(sprintf(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_success'), $this->counter['entry']['created'] + $this->counter['entry']['updated'], $this->counter['entry']['created'], $this->counter['entry']['updated']));
+        // Delete entries that were not updated during this sync run
+        // These are entries that no longer exist in Jira
+        // Only perform deletion if we have a previous sync timestamp (not first run)
+        if ($lastSyncTimestamp) {
+            $deletedCount = Entry::query()
+                ->where('updatedate', $syncStartTime, '<')
+                ->count();
+
+            if ($deletedCount > 0) {
+                Entry::query()
+                    ->where('updatedate', $syncStartTime, '<')
+                    ->delete();
+                $this->counter['entry']['deleted'] += $deletedCount;
+            }
+        }
+
+        // Save current sync timestamp for next run
+        $addon->setConfig('last_sync_timestamp', $syncStartTime);
+
+        $this->setMessage(sprintf(
+            rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_success'),
+            $this->counter['entry']['created'] + $this->counter['entry']['updated'],
+            $this->counter['entry']['created'],
+            $this->counter['entry']['updated'],
+            $this->counter['entry']['deleted'],
+        ));
         return true;
     }
 
@@ -190,6 +222,7 @@ class Sync extends rex_cronjob
      * @return string The extracted and sanitized content div HTML, or empty string if not found
      */
     private function extractContentDiv(?string $iframe_content): string
+    {
         if (!$iframe_content) {
             return '';
         }
@@ -250,11 +283,11 @@ class Sync extends rex_cronjob
     /**
      * Erstellt oder aktualisiert einen Eintrag mit den übergebenen Daten.
      *
-     * @param array $current  Die aktuellen Daten des Eintrags.
-     * @param string $content Der fertige HTML-Content (optional, Standard: leerer String).
-     * @return void
+     * @param array $current  die aktuellen Daten des Eintrags
+     * @param string $content der fertige HTML-Content (optional, Standard: leerer String)
      */
     public function createEntry(array $current, $content = ''): void
+    {
         $entry = Entry::query()->where('jiraid', $current['source']['pageId'])->findOne();
 
         if (null === $entry) {
