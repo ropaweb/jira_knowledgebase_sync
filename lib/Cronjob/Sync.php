@@ -150,7 +150,7 @@ class Sync extends rex_cronjob
             $this->counter['entry']['created'] + $this->counter['entry']['updated'],
             $this->counter['entry']['created'],
             $this->counter['entry']['updated'],
-            $this->counter['entry']['deleted']
+            $this->counter['entry']['deleted'],
         ));
         return true;
     }
