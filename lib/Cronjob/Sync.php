@@ -3,6 +3,7 @@
 namespace Ropaweb\JiraKnowledgebaseSync\Cronjob;
 
 use DOMDocument;
+use DOMXPath;
 use rex_addon;
 use rex_cronjob;
 use rex_i18n;
@@ -193,6 +194,31 @@ class Sync extends rex_cronjob
                 $element = $elements->item($i);
                 if ($element && $element->parentNode) {
                     $element->parentNode->removeChild($element);
+                }
+            }
+        }
+
+        // Remove dangerous event handler attributes (onclick, onerror, onload, etc.)
+        $xpath = new DOMXPath($dom);
+        $elementsWithEvents = $xpath->query('//*[@*[starts-with(name(), "on")]]', $content_div);
+        foreach ($elementsWithEvents as $element) {
+            // Iterate over a copy of attributes to avoid mutating during iteration
+            foreach (iterator_to_array($element->attributes) as $attr) {
+                if (0 === stripos($attr->name, 'on')) {
+                    $element->removeAttribute($attr->name);
+                }
+            }
+        }
+
+        // Remove javascript: URLs in href and src attributes
+        $elementsWithUrls = $xpath->query('//*[@href or @src]', $content_div);
+        foreach ($elementsWithUrls as $element) {
+            foreach (['href', 'src'] as $attrName) {
+                if ($element->hasAttribute($attrName)) {
+                    $value = $element->getAttribute($attrName);
+                    if (preg_match('/^\s*javascript:/i', $value)) {
+                        $element->removeAttribute($attrName);
+                    }
                 }
             }
         }
