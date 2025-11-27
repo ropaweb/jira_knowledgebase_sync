@@ -185,7 +185,7 @@ class Sync extends rex_cronjob
      * @param string|null $iframe_content The HTML content to extract from
      * @return string The extracted and sanitized content div HTML, or empty string if not found
      */
-    private function extractContentDiv(?string $iframe_content)
+    private function extractContentDiv(?string $iframe_content): string
         if (!$iframe_content) {
             return '';
         }
