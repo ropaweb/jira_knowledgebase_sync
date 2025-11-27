@@ -106,7 +106,7 @@ class Sync extends rex_cronjob
             // Query Parameter neu setzen
             $start += 50;
 
-            // Cursor aktualisieren using parse_url/parse_str for safe parsing
+            // Cursor aktualisieren mittels parse_url/parse_str für sicheres Parsing
             $cursor_string = $data['_links']['next'] ?? '';
             $cursor = '';
             if ($cursor_string) {
