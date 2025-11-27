@@ -248,10 +248,13 @@ class Sync extends rex_cronjob
     }
 
     /**
-     * createEntry erhält jetzt den fertigen HTML-Content.
+     * Erstellt oder aktualisiert einen Eintrag mit den übergebenen Daten.
+     *
+     * @param array $current  Die aktuellen Daten des Eintrags.
+     * @param string $content Der fertige HTML-Content (optional, Standard: leerer String).
+     * @return void
      */
     public function createEntry(array $current, $content = ''): void
-    {
         $entry = Entry::query()->where('jiraid', $current['source']['pageId'])->findOne();
 
         if (null === $entry) {
