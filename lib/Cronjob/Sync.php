@@ -141,13 +141,15 @@ class Sync extends rex_cronjob
         // These are entries that no longer exist in Jira
         // Only perform deletion if we have a previous sync timestamp (not first run)
         if ($lastSyncTimestamp) {
-            $deletedEntries = Entry::query()
+            $deletedCount = Entry::query()
                 ->where('updatedate', $syncStartTime, '<')
-                ->find();
+                ->count();
 
-            foreach ($deletedEntries as $entry) {
-                $entry->delete();
-                ++$this->counter['entry']['deleted'];
+            if ($deletedCount > 0) {
+                Entry::query()
+                    ->where('updatedate', $syncStartTime, '<')
+                    ->delete();
+                $this->counter['entry']['deleted'] += $deletedCount;
             }
         }
 
