@@ -80,6 +80,8 @@ class Sync extends rex_cronjob
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             curl_setopt($ch, CURLOPT_USERPWD, "$user:$key");
             curl_setopt($ch, CURLOPT_HTTPHEADER, ['Content-Type: application/json']);
+            curl_setopt($ch, CURLOPT_TIMEOUT, self::FETCH_TIMEOUT);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::CONNECT_TIMEOUT);
             $response = curl_exec($ch);
 
             if (curl_errno($ch)) {
