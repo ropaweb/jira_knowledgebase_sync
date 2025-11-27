@@ -32,7 +32,7 @@ class Sync extends rex_cronjob
     private const CONNECT_TIMEOUT = 2;
 
     /** @var array<string> HTML tags to be removed for XSS prevention */
-    private const DISALLOWED_TAGS = ['iframe', 'script', 'object', 'embed', 'link', 'meta', 'body', 'html', 'form', 'button', 'input', 'select'];
+    private const DISALLOWED_TAGS = ['iframe', 'script', 'object', 'embed', 'link', 'meta', 'form', 'button', 'input', 'select'];
 
     /** @var array<string,array<string,int>> */
     private $counter = [
