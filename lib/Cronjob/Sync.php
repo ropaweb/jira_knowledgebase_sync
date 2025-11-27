@@ -25,6 +25,12 @@ class Sync extends rex_cronjob
 {
     private const ENDPOINT = '/rest/servicedeskapi/knowledgebase/article';
 
+    /** @var int Timeout in seconds for fetching content */
+    private const FETCH_TIMEOUT = 5;
+
+    /** @var int Connection timeout in seconds */
+    private const CONNECT_TIMEOUT = 2;
+
     /** @var array<string> HTML tags to be removed for XSS prevention */
     private const DISALLOWED_TAGS = ['iframe', 'script', 'object', 'embed', 'link', 'meta', 'body', 'html', 'form', 'button', 'input', 'select'];
 
@@ -142,8 +148,8 @@ class Sync extends rex_cronjob
             }
             $ch = curl_init($url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, 30);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+            curl_setopt($ch, CURLOPT_TIMEOUT, self::FETCH_TIMEOUT);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::CONNECT_TIMEOUT);
             $curlHandles[$i] = $ch;
             curl_multi_add_handle($multiHandle, $ch);
         }
