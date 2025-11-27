@@ -191,7 +191,9 @@ class Sync extends rex_cronjob
             // Iterate backwards to safely remove elements
             for ($i = $elements->length - 1; $i >= 0; --$i) {
                 $element = $elements->item($i);
-                $element->parentNode->removeChild($element);
+                if ($element && $element->parentNode) {
+                    $element->parentNode->removeChild($element);
+                }
             }
         }
 
