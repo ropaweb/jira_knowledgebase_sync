@@ -166,7 +166,7 @@ class Sync extends rex_cronjob
         }
         curl_multi_close($multiHandle);
 
-        // Reihenfolge stimmt zu den $urls/$entries
+        // Reihenfolge entspricht den $urls/$entries
         return $results;
     }
 
