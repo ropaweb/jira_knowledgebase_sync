@@ -2,8 +2,8 @@
 
 namespace Ropaweb\JiraKnowledgebaseSync\Cronjob;
 
-use DOMDocument;
-use DOMXPath;
+use Dom\HTMLDocument;
+use Dom\XPath;
 use rex_addon;
 use rex_cronjob;
 use rex_i18n;
@@ -19,6 +19,7 @@ use const CURLOPT_RETURNTRANSFER;
 use const CURLOPT_TIMEOUT;
 use const CURLOPT_URL;
 use const CURLOPT_USERPWD;
+use const LIBXML_NOERROR;
 
 class Sync extends rex_cronjob
 {
@@ -176,10 +177,9 @@ class Sync extends rex_cronjob
         if (!$iframe_content) {
             return '';
         }
-        $dom = new DOMDocument();
-        libxml_use_internal_errors(true);
-        $dom->loadHTML($iframe_content);
-        libxml_clear_errors();
+
+        // PHP 8.4+ HTML5 compliant DOM parser
+        $dom = HTMLDocument::createFromString($iframe_content, LIBXML_NOERROR, 'UTF-8');
 
         $content_div = $dom->getElementById('content');
         if (!$content_div) {
@@ -199,7 +199,7 @@ class Sync extends rex_cronjob
         }
 
         // Remove dangerous event handler attributes (onclick, onerror, onload, etc.)
-        $xpath = new DOMXPath($dom);
+        $xpath = new XPath($dom);
         $elementsWithEvents = $xpath->query('//*[@*[starts-with(name(), "on")]]', $content_div);
         foreach ($elementsWithEvents as $element) {
             // Iterate over a copy of attributes to avoid mutating during iteration
