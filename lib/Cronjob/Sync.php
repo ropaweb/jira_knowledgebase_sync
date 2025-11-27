@@ -179,7 +179,7 @@ class Sync extends rex_cronjob
         }
 
         // PHP 8.4+ HTML5 compliant DOM parser
-        $dom = HTMLDocument::createFromString($iframe_content, LIBXML_NOERROR);
+        $dom = HTMLDocument::createFromString($iframe_content, LIBXML_NOERROR, 'UTF-8');
 
         $content_div = $dom->getElementById('content');
         if (!$content_div) {
