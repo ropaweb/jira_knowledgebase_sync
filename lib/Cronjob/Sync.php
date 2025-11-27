@@ -140,40 +140,44 @@ class Sync extends rex_cronjob
     private function fetchMultipleContents(array $urls): array
     {
         $multiHandle = curl_multi_init();
-        $curlHandles = [];
-        $results = [];
+        // Limit the number of parallel requests to avoid memory exhaustion
+        $batchSize = 10; // You can adjust this value as needed
+        $results = array_fill(0, count($urls), '');
+        foreach (array_chunk($urls, $batchSize, true) as $chunk) {
+            $multiHandle = curl_multi_init();
+            $curlHandles = [];
 
-        foreach ($urls as $i => $url) {
-            if (!$url) {
-                $results[$i] = '';
-                continue;
+            foreach ($chunk as $i => $url) {
+                if (!$url) {
+                    $results[$i] = '';
+                    continue;
+                }
+                $ch = curl_init($url);
+                curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+                curl_setopt($ch, CURLOPT_TIMEOUT, self::FETCH_TIMEOUT);
+                curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::CONNECT_TIMEOUT);
+                $curlHandles[$i] = $ch;
+                curl_multi_add_handle($multiHandle, $ch);
             }
-            $ch = curl_init($url);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-            curl_setopt($ch, CURLOPT_TIMEOUT, self::FETCH_TIMEOUT);
-            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, self::CONNECT_TIMEOUT);
-            $curlHandles[$i] = $ch;
-            curl_multi_add_handle($multiHandle, $ch);
-        }
 
-        do {
-            $status = curl_multi_exec($multiHandle, $active);
-            curl_multi_select($multiHandle);
-        } while ($active && CURLM_OK == $status);
+            do {
+                $status = curl_multi_exec($multiHandle, $active);
+                curl_multi_select($multiHandle);
+            } while ($active && CURLM_OK == $status);
 
-        foreach ($curlHandles as $i => $ch) {
-            $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
-            $error = curl_error($ch);
-            // $httpCode === 0 indicates a connection failure (cURL could not connect)
-            if ($error || $httpCode === 0 || $httpCode < 200 || $httpCode >= 300) {
-                $results[$i] = '';
-            } else {
-                $results[$i] = curl_multi_getcontent($ch);
+            foreach ($curlHandles as $i => $ch) {
+                $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+                $error = curl_error($ch);
+                if ($error || $httpCode < 200 || $httpCode >= 300) {
+                    $results[$i] = '';
+                } else {
+                    $results[$i] = curl_multi_getcontent($ch);
+                }
+                curl_multi_remove_handle($multiHandle, $ch);
+                curl_close($ch);
             }
-            curl_multi_remove_handle($multiHandle, $ch);
-            curl_close($ch);
+            curl_multi_close($multiHandle);
         }
-        curl_multi_close($multiHandle);
 
         // Reihenfolge entspricht den $urls/$entries
         return $results;
