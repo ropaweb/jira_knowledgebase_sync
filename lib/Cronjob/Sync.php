@@ -145,12 +145,13 @@ class Sync extends rex_cronjob
             ++$this->counter['entry']['deleted'];
         }
 
-        $totalSynced = $this->counter['entry']['created'] + $this->counter['entry']['updated'];
-        $created = $this->counter['entry']['created'];
-        $updated = $this->counter['entry']['updated'];
-        $deleted = $this->counter['entry']['deleted'];
-
-        $this->setMessage(sprintf(rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_success'), $totalSynced, $created, $updated, $deleted));
+        $this->setMessage(sprintf(
+            rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_success'),
+            $this->counter['entry']['created'] + $this->counter['entry']['updated'],
+            $this->counter['entry']['created'],
+            $this->counter['entry']['updated'],
+            $this->counter['entry']['deleted']
+        ));
         return true;
     }
 
