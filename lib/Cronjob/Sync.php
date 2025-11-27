@@ -239,6 +239,11 @@ class Sync extends rex_cronjob
             }
         }
 
+        // Remove all style attributes for defense in depth
+        $elementsWithStyle = $xpath->query('//*[@style]', $content_div);
+        foreach ($elementsWithStyle as $element) {
+            $element->removeAttribute('style');
+        }
         return $dom->saveHTML($content_div);
     }
 
