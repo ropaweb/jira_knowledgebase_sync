@@ -94,6 +94,7 @@ class Sync extends rex_cronjob
 
             // Inhalte parallel holen (nur gültige Links)
             $htmlResults = $this->fetchMultipleContents($iframeLinks);
+            $htmlResults = array_values($htmlResults);
 
             // === Einträge anlegen ===
             foreach ($entriesToProcess as $i => $entry) {
