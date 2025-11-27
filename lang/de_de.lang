@@ -60,7 +60,7 @@ jira_knowledgebase_sync_publish_task_name = JiraSync - Einträge online stellen
 jira_knowledgebase_sync_cronjob_task_error_connection = Verbindungsdaten konnten nicht ausgelesen werden
 jira_knowledgebase_sync_cronjob_task_error = Fehler: 
 
-jira_knowledgebase_sync_cronjob_task_success = %s Einträge wurden erfolgreich synchronisiert (Erstellt: %s, aktualisiert %s)
+jira_knowledgebase_sync_cronjob_task_success = %s Einträge wurden erfolgreich synchronisiert (Erstellt: %s, aktualisiert: %s, gelöscht: %s)
 jira_knowledgebase_sync_publish_task_success = %s Einträge wurden erfolgreich online gestellt
 jira_knowledgebase_sync_publish_task_no_entries = Keine Einträge die veröffentlicht werden können
 jira_knowledgebase_sync_publish_save_error = Beim speichern der Änderung ist ein Fehler aufgetreten (ID: %s)
