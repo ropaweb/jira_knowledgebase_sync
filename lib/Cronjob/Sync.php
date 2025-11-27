@@ -56,7 +56,10 @@ class Sync extends rex_cronjob
             return false;
         }
 
-        // Record sync start time to identify deleted entries later
+        // Get last sync timestamp from configuration for deletion comparison
+        $lastSyncTimestamp = $params['last_sync_timestamp'] ?? null;
+
+        // Record current sync start time
         $syncStartTime = date('Y-m-d H:i:s');
 
         $start = 0;
@@ -136,14 +139,20 @@ class Sync extends rex_cronjob
 
         // Delete entries that were not updated during this sync run
         // These are entries that no longer exist in Jira
-        $deletedEntries = Entry::query()
-            ->where('updatedate', $syncStartTime, '<')
-            ->find();
+        // Only perform deletion if we have a previous sync timestamp (not first run)
+        if ($lastSyncTimestamp) {
+            $deletedEntries = Entry::query()
+                ->where('updatedate', $syncStartTime, '<')
+                ->find();
 
-        foreach ($deletedEntries as $entry) {
-            $entry->delete();
-            ++$this->counter['entry']['deleted'];
+            foreach ($deletedEntries as $entry) {
+                $entry->delete();
+                ++$this->counter['entry']['deleted'];
+            }
         }
+
+        // Save current sync timestamp for next run
+        $addon->setConfig('last_sync_timestamp', $syncStartTime);
 
         $this->setMessage(sprintf(
             rex_i18n::msg('jira_knowledgebase_sync_cronjob_task_success'),
