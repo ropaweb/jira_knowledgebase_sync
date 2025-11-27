@@ -164,7 +164,8 @@ class Sync extends rex_cronjob
         foreach ($curlHandles as $i => $ch) {
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $error = curl_error($ch);
-            if ($error || $httpCode < 200 || $httpCode >= 300) {
+            // $httpCode === 0 indicates a connection failure (cURL could not connect)
+            if ($error || $httpCode === 0 || $httpCode < 200 || $httpCode >= 300) {
                 $results[$i] = '';
             } else {
                 $results[$i] = curl_multi_getcontent($ch);
