@@ -34,7 +34,7 @@ if ($count_categories > 1):
                     $this->setVar('category_name', $category->getName(), false);
                     // i trotz subfragment weitergeben, damit hochzählen klappt
                     $this->setVar('counter_i', $i, false);
-        echo $this->subfragment('jira_knowledgebase_sync/accordion_first_header.php');
+        echo $this->subfragment('jira_knowledgebase_sync/accordion_category_header.php');
 
         ?>
 
@@ -58,7 +58,7 @@ if ($count_categories > 1):
                         $this->setVar('acc_name', $acc->name, false);
                         $this->setVar('acc_jiracontent', $acc->jiracontent, false);
 
-                        echo $this->subfragment('jira_knowledgebase_sync/accordion_second.php');
+                        echo $this->subfragment('jira_knowledgebase_sync/accordion_question.php');
 
                         ++$j;
                     } // end of foreach
