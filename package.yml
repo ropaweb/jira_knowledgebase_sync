@@ -10,7 +10,7 @@ requires:                       # Abhängigkeiten definieren, z.B.
         version: '>8.1,<9'
     redaxo: ^5.16              # REDAXO Core-Version
     packages:                  # Plugins und Addons
-        yform: "^4"
+        yform: "^5"
         cronjob: ">1"
 
 page:
