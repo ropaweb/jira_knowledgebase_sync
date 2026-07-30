@@ -148,6 +148,7 @@ class Sync extends rex_cronjob
             if ($deletedCount > 0) {
                 Entry::query()
                     ->where('updatedate', $syncStartTime, '<')
+                    ->find()
                     ->delete();
                 $this->counter['entry']['deleted'] += $deletedCount;
             }
