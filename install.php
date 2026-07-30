@@ -38,6 +38,16 @@ rex_sql_table::get(rex::getTable('jira_knowledgebase_sync_entry'))
 
 /* Tablesets aktualisieren */
 if (rex_addon::get('yform')->isAvailable() && !rex::isSafeMode()) {
+    // Remove existing YForm definitions to avoid duplicate field errors
+    rex_sql::factory()
+        ->setQuery('DELETE FROM ' . rex::getTable('yform_field') . ' WHERE table_name IN (?, ?)', 
+            ['rex_jira_knowledgebase_sync_entry', 'rex_jira_knowledgebase_sync_category'])
+        ->execute();
+    rex_sql::factory()
+        ->setQuery('DELETE FROM ' . rex::getTable('yform_table') . ' WHERE table_name IN (?, ?)', 
+            ['rex_jira_knowledgebase_sync_entry', 'rex_jira_knowledgebase_sync_category'])
+        ->execute();
+    
     rex_yform_manager_table_api::importTablesets(rex_file::get(__DIR__ . '/install/rex_jira_knowledgebase_sync_entry.tableset.json'));
     rex_yform_manager_table_api::importTablesets(rex_file::get(__DIR__ . '/install/rex_jira_knowledgebase_sync_category.tableset.json'));
     rex_yform_manager_table::deleteCache();

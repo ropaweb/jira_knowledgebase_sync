@@ -8,7 +8,7 @@ requires:
         version: '>=8.4,<9'
     redaxo: ^5.16
     packages:
-        yform: "^4"
+        yform: ">4"
         cronjob: ">1"
 
 page:
