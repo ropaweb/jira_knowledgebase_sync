@@ -20,4 +20,4 @@ rex_extension::register(
 
 $_REQUEST['table_name'] = $table_name;
 
-include rex_path::addon('yform',   'pages/manager.data_edit.php');
+include rex_path::addon('yform', 'pages/manager.data_edit.php');

@@ -7,6 +7,7 @@ use Dom\XPath;
 use rex_addon;
 use rex_cronjob;
 use rex_i18n;
+use rex_logger;
 use Ropaweb\JiraKnowledgebaseSync\Entry;
 
 use function count;
@@ -37,7 +38,7 @@ class Sync extends rex_cronjob
 
     /** @var array<string,array<string,int>> */
     private $counter = [
-        'entry' => ['created' => 0, 'updated' => 0, 'deleted' => 0],
+        'entry' => ['created' => 0, 'updated' => 0, 'deleted' => 0, 'errors' => 0],
     ];
 
     public function execute()
@@ -163,6 +164,7 @@ class Sync extends rex_cronjob
             $this->counter['entry']['created'],
             $this->counter['entry']['updated'],
             $this->counter['entry']['deleted'],
+            $this->counter['entry']['errors'],
         ));
         return true;
     }
@@ -291,21 +293,37 @@ class Sync extends rex_cronjob
     {
         $entry = Entry::query()->where('jiraid', $current['source']['pageId'])->findOne();
 
+        $createdNew = false;
         if (null === $entry) {
             $entry = Entry::create();
             $entry->setValue('jiraid', $current['source']['pageId']);
             $entry->setValue('status', 0);
             $entry->setValue('createdate', date('Y-m-d H:i:s'));
-            ++$this->counter['entry']['created'];
-        } else {
-            ++$this->counter['entry']['updated'];
+            $createdNew = true;
         }
 
         $entry->setValue('name', $current['title']);
         $entry->setValue('jiraproject', $current['source']['spaceKey']);
         $entry->setValue('jiracontent', $content);
         $entry->setValue('updatedate', date('Y-m-d H:i:s'));
-        $entry->save();
+
+        if ($entry->save()) {
+            if ($createdNew) {
+                ++$this->counter['entry']['created'];
+            } else {
+                ++$this->counter['entry']['updated'];
+            }
+        } else {
+            ++$this->counter['entry']['errors'];
+
+            rex_logger::factory()->error(
+                'Jira knowledgebase sync: Entry {jira_id} could not be saved: {errors}',
+                [
+                    'jira_id' => (string) ($current['source']['pageId'] ?? 'unknown'),
+                    'errors' => implode('; ', $entry->getMessages()) ?: 'Unknown error',
+                ],
+            );
+        }
     }
 
     public function getTypeName()
