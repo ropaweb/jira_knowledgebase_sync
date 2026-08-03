@@ -7,6 +7,7 @@ use Dom\XPath;
 use rex_addon;
 use rex_cronjob;
 use rex_i18n;
+use rex_logger;
 use Ropaweb\JiraKnowledgebaseSync\Entry;
 
 use function count;
@@ -37,7 +38,7 @@ class Sync extends rex_cronjob
 
     /** @var array<string,array<string,int>> */
     private $counter = [
-        'entry' => ['created' => 0, 'updated' => 0, 'deleted' => 0, 'errors' => 0]
+        'entry' => ['created' => 0, 'updated' => 0, 'deleted' => 0, 'errors' => 0],
     ];
 
     public function execute()
@@ -163,7 +164,7 @@ class Sync extends rex_cronjob
             $this->counter['entry']['created'],
             $this->counter['entry']['updated'],
             $this->counter['entry']['deleted'],
-            $this->counter['entry']['errors']
+            $this->counter['entry']['errors'],
         ));
         return true;
     }
@@ -315,12 +316,12 @@ class Sync extends rex_cronjob
         } else {
             ++$this->counter['entry']['errors'];
 
-            \rex_logger::factory()->error(
+            rex_logger::factory()->error(
                 'Jira knowledgebase sync: Entry {jira_id} could not be saved: {errors}',
                 [
                     'jira_id' => (string) ($current['source']['pageId'] ?? 'unknown'),
                     'errors' => implode('; ', $entry->getMessages()) ?: 'Unknown error',
-                ]
+                ],
             );
         }
     }
